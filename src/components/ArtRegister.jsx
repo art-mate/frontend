@@ -8,6 +8,8 @@ const ArtRegisterContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #fff3f3;
+  font-size: 40px;
+  font-weight: bold;
 `;
 
 export default function ArtRegister() {

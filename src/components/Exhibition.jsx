@@ -8,6 +8,8 @@ const ExhibitionContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #effff8;
+  font-size: 40px;
+  font-weight: bold;
 `;
 
 export default function Exhibition() {
