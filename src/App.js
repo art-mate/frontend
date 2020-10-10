@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GlobalStyle } from './global-styles';
-
-const Main = styled.div`
-  background-color: orange;
-`;
+import Router from './Router';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Main>안녕하세요</Main>
+      <Router />
     </>
   );
 }
