@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import ThemeContext from '../App';
 
 const MainContainer = styled.main`
   width: 100%;
@@ -8,12 +7,10 @@ const MainContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: 3rem;
   font-weight: bold;
 `;
 
 export default function Main() {
-  //const { theme, toggleTheme } = useContext(ThemeContext);
-
   return <MainContainer>프로젝트 소개</MainContainer>;
 }

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import DarkModeToggle from './DarkModeToggle';
+import { ThemeContext } from '../App';
 
 const NavContainer = styled.nav`
   width: 100%;
@@ -10,6 +11,8 @@ const NavContainer = styled.nav`
   justify-content: center;
   align-items: center;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+  background: ${(props) => props.navBar};
+  transition: all 0.5s ease-in-out;
 `;
 
 const NavContentContainer = styled.div`
@@ -20,11 +23,11 @@ const NavContentContainer = styled.div`
   align-items: center;
 `;
 
-const TitleContainer = styled.div`
+const TitleContainer = styled.header`
   height: 100%;
-  font-size: 40px;
+  font-size: 2rem;
   font-weight: 900;
-  color: #2c49ec;
+  color: #e6328d;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,12 +47,10 @@ const LoginButton = styled.button`
   height: 40px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 30px;
-  color: white;
-  background: ${({ theme }) => theme.text};
   font-size: 14px;
-
+  color: white;
   &:hover {
-    background-color: #0022e4;
+    background-color: #ff0081;
   }
 `;
 
@@ -58,18 +59,17 @@ const RegisterButton = styled.button`
   height: 40px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 30px;
-  color: white;
-  background: ${({ theme }) => theme.mainColor};
   font-size: 14px;
-
+  color: white;
   &:hover {
-    background-color: #0022e4;
+    background-color: #ff0081;
   }
 `;
 
 export default function Navigation() {
+  const { theme } = useContext(ThemeContext);
   return (
-    <NavContainer>
+    <NavContainer navBar={theme.navBar}>
       <NavContentContainer>
         <TitleContainer>artmate</TitleContainer>
         <DarkModeToggle />
