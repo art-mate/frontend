@@ -7,7 +7,6 @@ const ExhibitionContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #effff8;
   font-size: 40px;
   font-weight: bold;
 `;

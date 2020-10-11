@@ -7,7 +7,6 @@ const ArtRegisterContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff3f3;
   font-size: 40px;
   font-weight: bold;
 `;

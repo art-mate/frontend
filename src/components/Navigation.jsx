@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import DarkModeToggle from './DarkModeToggle';
 
 const NavContainer = styled.nav`
   width: 100%;
@@ -44,11 +45,11 @@ const LoginButton = styled.button`
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 30px;
   color: white;
-  background-color: #2c49ec;
+  background: ${({ theme }) => theme.text};
   font-size: 14px;
 
   &:hover {
-    background-color: #3d56e2;
+    background-color: #0022e4;
   }
 `;
 
@@ -58,11 +59,11 @@ const RegisterButton = styled.button`
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 30px;
   color: white;
-  background-color: #2c49ec;
+  background: ${({ theme }) => theme.mainColor};
   font-size: 14px;
 
   &:hover {
-    background-color: #3d56e2;
+    background-color: #0022e4;
   }
 `;
 
@@ -71,6 +72,7 @@ export default function Navigation() {
     <NavContainer>
       <NavContentContainer>
         <TitleContainer>artmate</TitleContainer>
+        <DarkModeToggle />
         <InfoContainer>
           <LoginButton>로그인</LoginButton>
           <RegisterButton>회원가입</RegisterButton>

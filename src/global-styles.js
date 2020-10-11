@@ -9,8 +9,12 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         font-family: 'NanumSquare', sans-serif;
+        background: ${({ theme }) => theme.body};
+        color: ${({ theme }) => theme.text};
+        transition: all 0.5s ease-in-out;
     }
-    button { 
+    button {
+        background: ${({ theme }) => theme.mainColor};
         cursor: pointer;
         border: none;
         outline: none;
