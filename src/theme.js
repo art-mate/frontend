@@ -13,5 +13,5 @@ export const darkTheme = {
   toggleBorder: 'rgba(0,0,0,.05)',
   toggleBackground: '#353535',
   mainColor: '#e6328d',
-  navBar: '#2c2c2c',
+  navBar: '#303030',
 };
