@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🎨 artmate
 
-## Available Scripts
+artmate frontend repository
 
-In the project directory, you can run:
+# ✔️ Prerequisites
 
-### `yarn start`
+시작하기 전에, 저번에 npm을 설치하셨는데 속도가 좀 느린 것 같더라구요. 그래서 좀 더 빠른 yarn을 사용하는게 좋을 것 같아요. cmd 창에서 아래와 같이 하면 빠르게 설치하실 수 있습니다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+$ npm install -g yarn
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```
+$ yarn --version
+```
 
-### `yarn test`
+# ✨ Getting Started
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. vscode에서 터미널(Ctrl+Shift+`)을 열고 브랜치를 master로 바꿉니다.
 
-### `yarn build`
+```
+$ git checkout master
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. upstream(frontend)에서 master브랜치 커밋을 가져와 현재 로컬 저장소에 병합을 합니다.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+$ git fetch upstream master
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$ git rebase upstream/master
+```
 
-### `yarn eject`
+3. 브랜치를 다시 자신의 이름으로 변경합니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+$ git checkout 이름
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. master 브랜치에 있는 코드를 가져옵니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+$ git pull origin master
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+5. App.js 등에서 충돌이 생길 것입니다. 충돌이 난 부분(>>>> 등)에 incoming change를 눌러줍니다.
+6. 패키지들을 설치합니다.
 
-## Learn More
+```
+$ yarn
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+7. 프로젝트 시작
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+$ yarn start
+```
 
-### Code Splitting
+# 🗣 Communication
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+위 과정을 하면서 생기는 이슈(에러)나 코드 작성을 하면서 생기는 이슈는 [issue](https://github.com/art-mate/frontend/issues)에서 new issue를 통해 대화하면 좋을 것 같습니다!
