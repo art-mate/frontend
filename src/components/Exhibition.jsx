@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { ThemeContext } from '../App';
 
 const ExhibitionContainer = styled.div`
   width: 100%;
@@ -12,5 +13,6 @@ const ExhibitionContainer = styled.div`
 `;
 
 export default function Exhibition() {
+  const { theme } = useContext(ThemeContext);
   return <ExhibitionContainer>3D전시관</ExhibitionContainer>;
 }

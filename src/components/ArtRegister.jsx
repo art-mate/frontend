@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { ThemeContext } from '../App';
 
 const ArtRegisterContainer = styled.div`
   width: 100%;
@@ -12,5 +13,6 @@ const ArtRegisterContainer = styled.div`
 `;
 
 export default function ArtRegister() {
+  const { theme } = useContext(ThemeContext);
   return <ArtRegisterContainer>작품등록</ArtRegisterContainer>;
 }

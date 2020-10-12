@@ -13,7 +13,6 @@ const ToggleButton = styled.button`
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
-  background: ${(props) => props.toggleBackground};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -28,22 +27,21 @@ const Emoji = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease-in-out;
 `;
 
 const ModeContent = styled.p`
   font-size: 0.8rem;
   color: white;
   margin-left: 5px;
+  transition: all 0.5s ease-in-out;
 `;
 
 export default function DarkModeToggle() {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <ToggleButton
-      onClick={toggleTheme}
-      toggleBackground={theme.toggleBackground}
-    >
+    <ToggleButton onClick={toggleTheme}>
       {theme === lightTheme ? (
         <>
           <Emoji>
