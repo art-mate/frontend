@@ -16,6 +16,37 @@ $ yarn --version
 
 # ✨ Getting Started
 
+이전에 설명드린 방법은 fork를 통해 협업을 하는 것이였는데, 복잡하기도 하고 찾아보니까 더 간단한 방법이 있어서 다른 방법으로 진행하는게 좋을 것 같습니다! <br />
+먼저 **이전에 받았던 frontend 폴더는 삭제하고** 현재 프로젝트 레포에서 똑같이 위의 Code를 누르고 url을 복사합니다. 그리고 터미널에서 다음과 같이 입력합니다.
+
+```
+$ git clone 복사한 url
+```
+
+clone이 완료 되었으면 **clone한 frontend 폴더**에서 이전에 했던대로 브랜치를 생성합니다. 저의 경우 daehoon으로 생성합니다.
+
+```
+$ git checkout -b daehoon
+```
+
+이제 해당 브랜치에서 코드를 수정하시면 됩니다. 코드를 작성하고 나면, 다음과 같이 입력합니다.
+
+```
+$ git add .
+
+$ git commit -m "수정 내용 한 줄로 요약"
+
+$ git push origin daehoon
+```
+
+위의 과정까지 완료하고 다시 현재 페이지로 오면 초록색 바탕의 Compare & Pull Request 버튼이 있을 겁니다. 그걸 눌러서 Pull Request를 작성하시면 됩니다. **Pull Request를 작성하고, merge버튼을 누르면 안됩니다.**
+
+# 🗣 Communication
+
+위 과정을 하면서 생기는 이슈(에러)나 코드 작성을 하면서 생기는 이슈는 [issue](https://github.com/art-mate/frontend/issues)에서 new issue를 통해 대화하면 좋을 것 같습니다!
+
+# ✨ fork
+
 1. vscode에서 터미널(Ctrl+Shift+`)을 열고 브랜치를 master로 바꿉니다.
 
 ```
@@ -56,7 +87,3 @@ $ yarn
 ```
 $ yarn start
 ```
-
-# 🗣 Communication
-
-위 과정을 하면서 생기는 이슈(에러)나 코드 작성을 하면서 생기는 이슈는 [issue](https://github.com/art-mate/frontend/issues)에서 new issue를 통해 대화하면 좋을 것 같습니다!
