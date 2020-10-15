@@ -5,14 +5,15 @@ import { ThemeContext } from '../App';
 
 const NavContainer = styled.nav`
   width: 100%;
-  height: 10vh;
-  min-height: 70px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
   background: ${(props) => props.navBar};
   transition: all 0.5s ease-in-out;
+  position: fixed;
+  z-index: 100;
 `;
 
 const NavContentContainer = styled.div`
@@ -31,6 +32,8 @@ const TitleContainer = styled.header`
   justify-content: center;
   align-items: center;
   font-family: 'Aclonica', sans-serif;
+  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+  transition: all 0.5s ease-in-out;
 `;
 
 const InfoContainer = styled.div`
@@ -72,7 +75,7 @@ export default function Navigation() {
   return (
     <NavContainer navBar={theme.navBar}>
       <NavContentContainer>
-        <TitleContainer>artmate</TitleContainer>
+        <TitleContainer themeProps={theme}>artmate</TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
           <LoginButton themeProps={theme}>로그인</LoginButton>

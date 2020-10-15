@@ -5,7 +5,7 @@ import Parel_girl from '../static/images/Parel_girl.jpg';
 
 const MainContainer = styled.main`
   width: 100%;
-  height: 85vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@ const MainContainer = styled.main`
 
 const IntroSection = styled.section`
   width: 95%;
-  height: 100%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
