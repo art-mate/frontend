@@ -27,7 +27,6 @@ const TitleContainer = styled.header`
   height: 100%;
   font-size: 2rem;
   font-weight: 900;
-  color: #e6328d;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,24 +44,26 @@ const InfoContainer = styled.div`
 const LoginButton = styled.button`
   width: 90px;
   height: 40px;
-  border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 30px;
   font-size: 14px;
-  color: white;
+  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
   &:hover {
-    background-color: #ff0081;
+    background: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#fafafa':'#363537'};
+    transition: all 0.1s ease-in-out;
   }
 `;
 
 const RegisterButton = styled.button`
   width: 90px;
   height: 40px;
-  border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 30px;
   font-size: 14px;
-  color: white;
+  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
   &:hover {
-    background-color: #ff0081;
+    background: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#fafafa':'#363537'};
+    transition: all 0.1s ease-in-out;
   }
 `;
 
@@ -74,8 +75,8 @@ export default function Navigation() {
         <TitleContainer>artmate</TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
-          <LoginButton>로그인</LoginButton>
-          <RegisterButton>회원가입</RegisterButton>
+          <LoginButton themeProps={theme}>로그인</LoginButton>
+          <RegisterButton themeProps={theme}>회원가입</RegisterButton>
         </InfoContainer>
       </NavContentContainer>
     </NavContainer>

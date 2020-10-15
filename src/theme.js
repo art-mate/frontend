@@ -1,8 +1,8 @@
 export const lightTheme = {
   body: '#fcfcfc',
   text: '#363537',
-  toggleBorder: 'rgba(0,0,0,.05)',
-  toggleBackground: '#e6328d',
+  toggleBorder: '#e6328d',
+  toggleBackground: '#fcfcfc',
   mainColor: '#e6328d',
   navBar: '#fcfcfc',
 };
@@ -10,8 +10,8 @@ export const lightTheme = {
 export const darkTheme = {
   body: '#252424',
   text: '#fafafa',
-  toggleBorder: 'rgba(0,0,0,.05)',
-  toggleBackground: '#3b3b3b',
+  toggleBorder: '#fafafa',
+  toggleBackground: '#252424',
   mainColor: '#e6328d',
   navBar: '#303030',
 };

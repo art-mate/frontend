@@ -1,5 +1,5 @@
 import React from 'react';
-import ArtRegister from '../components/ArtRegister';
+import ArtIntro from '../components/ArtIntro';
 import Main from '../components/Main';
 import Exhibition from '../components/Exhibition';
 import Navigation from '../components/Navigation';
@@ -9,7 +9,7 @@ export default function Home() {
     <React.Fragment>
       <Navigation />
       <Main />
-      <ArtRegister />
+      <ArtIntro />
       <Exhibition />
     </React.Fragment>
   );

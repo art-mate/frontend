@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 
-const ArtRegisterContainer = styled.div`
+const ArtIntroContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -12,7 +12,7 @@ const ArtRegisterContainer = styled.div`
   font-weight: bold;
 `;
 
-export default function ArtRegister() {
+export default function ArtIntro() {
   const { theme } = useContext(ThemeContext);
-  return <ArtRegisterContainer>작품등록</ArtRegisterContainer>;
+  return <ArtIntroContainer></ArtIntroContainer>;
 }
