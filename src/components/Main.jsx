@@ -33,6 +33,12 @@ const MainContent = styled.p`
   color: white;
   font-size: 1.2rem;
   width: 80%;
+
+  span {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
 `;
 
 const ImageSection = styled.figure`
@@ -60,6 +66,14 @@ const DetailButton = styled.button`
   }
 `;
 
+const SubHead = styled.h3`
+  font-size: 2.2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  font-weight: 900;
+`;
+
 export default function Main() {
   const { theme } = useContext(ThemeContext);
 
@@ -68,12 +82,12 @@ export default function Main() {
       <IntroSection>
         <ContentContainer>
           <MainContent>
-            <span style={{fontSize:'2.2rem', display:'flex', justifyContent:'center', marginBottom:'25px', fontWeight:'900'}}>
-             모든 예술가를 위한 플랫폼
-            </span>
-            <span style={{display:'flex', justifyContent:'center', marginBottom:'15px'}}>당신의 작품과 새로운 영감을 위해</span>
-            <span style={{display:'flex', justifyContent:'center', marginBottom:'15px'}}>보관하고 싶은 작품을 영구적으로 마음껏</span>
-            <span style={{display:'flex', justifyContent:'center', marginBottom:'15px'}}>보고싶은 작품을 간편하게</span>
+            <SubHead>
+              모든 예술가를 위한 플랫폼
+            </SubHead>
+            <span>당신의 작품과 새로운 영감을 위해</span>
+            <span>보관하고 싶은 작품을 영구적으로 마음껏</span>
+            <span>보고싶은 작품을 간편하게</span>
           </MainContent>
           <DetailButton themeProps={theme}>더 알아보기</DetailButton>
         </ContentContainer>

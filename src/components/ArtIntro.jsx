@@ -28,6 +28,12 @@ const ContentContainer = styled.p`
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
+
+  span {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
 `;
 
 const ImageSection = styled.section`
@@ -81,18 +87,26 @@ const DetailButton = styled.button`
   }
 `;
 
+const SubHead = styled.h3`
+  font-size: 2.2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  font-weight: 900;
+`;
+
 export default function ArtIntro() {
   const { theme } = useContext(ThemeContext);
   return (
     <ArtIntroContainer>
       <IntroSection themeProps={theme}>
         <ContentContainer>
-          <span style={{fontSize:'2.2rem', display:'flex', justifyContent:'center', marginBottom:'25px', fontWeight:'900'}}>
+          <SubHead>
             모든 전공의 예술 작품
-          </span>
-          <span style={{display:'flex', justifyContent:'center', marginBottom:'15px'}}>동양화, 서양화 등을 비롯한 모든 그림</span>
-          <span style={{display:'flex', justifyContent:'center', marginBottom:'15px'}}>조소전공을 위한 조각 작품</span>
-          <span style={{display:'flex', justifyContent:'center', marginBottom:'15px'}}>찾고있는 분야의 작품을 지금 바로 구경해보세요.</span>
+          </SubHead>
+          <span>동양화, 서양화 등을 비롯한 모든 그림</span>
+          <span>조소전공을 위한 조각 작품</span>
+          <span>찾고있는 분야의 작품을 지금 바로 구경해보세요.</span>
         </ContentContainer>
         <ImageSection>
           <LeftImageSection>
