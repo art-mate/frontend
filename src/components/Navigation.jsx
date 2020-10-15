@@ -27,12 +27,12 @@ const NavContentContainer = styled.div`
 
 const TitleContainer = styled.header`
   height: 100%;
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-weight: 900;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Aclonica', sans-serif;
+  font-family: 'Dancing Script', cursive;
   color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
   transition: all 0.5s ease-in-out;
 `;
