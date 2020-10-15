@@ -7,7 +7,7 @@ const ToggleButton = styled.button`
   position: fixed;
   width: 115px;
   height: 45px;
-  right: 1.5rem;
+  right: 5rem;
   bottom: 1.5rem;
   border-radius: 30px;
   cursor: pointer;
@@ -22,8 +22,7 @@ const ToggleButton = styled.button`
   z-index: 10000;
 
   &:hover {
-    filter: brightness(1.18);
-    transform: translateY(-3px);
+    filter: brightness(${(props) => props.themeProps.body === '#fcfcfc' ? '0.9':'1.13'});
   }
 `;
 

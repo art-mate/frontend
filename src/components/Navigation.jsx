@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import DarkModeToggle from './DarkModeToggle';
 import { ThemeContext } from '../App';
+import ScrollToTop from './ScrollToTop';
 
 const NavContainer = styled.nav`
   width: 100%;
@@ -26,7 +27,7 @@ const NavContentContainer = styled.div`
 
 const TitleContainer = styled.header`
   height: 100%;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 900;
   display: flex;
   justify-content: center;
@@ -49,10 +50,11 @@ const LoginButton = styled.button`
   height: 40px;
   border-radius: 30px;
   font-size: 14px;
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#363537':'#fafafa'};
+  border: 1px solid #fafafa;
   &:hover {
-    background: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
-    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#fafafa':'#363537'};
+    background: #fafafa;
+    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#363537'};
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -62,10 +64,11 @@ const RegisterButton = styled.button`
   height: 40px;
   border-radius: 30px;
   font-size: 14px;
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#363537':'#fafafa'};
+  border: 1px solid #fafafa;
   &:hover {
-    background: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
-    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#fafafa':'#363537'};
+    background: #fafafa;
+    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#363537'};
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -81,6 +84,7 @@ export default function Navigation() {
           <LoginButton themeProps={theme}>로그인</LoginButton>
           <RegisterButton themeProps={theme}>회원가입</RegisterButton>
         </InfoContainer>
+        <ScrollToTop />
       </NavContentContainer>
     </NavContainer>
   );
