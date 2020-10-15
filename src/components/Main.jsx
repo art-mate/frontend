@@ -42,6 +42,7 @@ const ImageSection = styled.figure`
   justify-content: center;
   align-items: center;
   filter: brightness(0.5);
+  position: relative;
 `;
 
 const DetailButton = styled.button`
@@ -78,6 +79,7 @@ export default function Main() {
         </ContentContainer>
         <ImageSection>
           <img src={Parel_girl} alt="parel"/>
+          {/* <figcaption style={{position:'absolute', left:'50%', bottom:'10px', color: 'white', fontSize:'10px'}}>진주 귀걸이를 한 소녀</figcaption> */}
         </ImageSection>
       </IntroSection>
     </MainContainer>
