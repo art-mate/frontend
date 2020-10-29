@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect }from 'react';
+import { ThemeContext } from '../App';
+
 import styled from 'styled-components';
 import Navigation from '../components/Navigation';
 import oriental from '../static/images/oriental.jpeg';
@@ -48,7 +50,7 @@ const MenuGrid = styled.div`
   display: grid;
   margin-bottom: 80px;
   grid-column-gap: 2vw;
-  grid-row-gap: 2vw;
+  grid-row-gap: 4vw;
   grid-template-columns: repeat(3, 1fr);
 
   @media screen and (max-width: 430px) {
@@ -60,9 +62,10 @@ const MenuGrid = styled.div`
 const PhotoContainer = styled.figure`
   width: 23vw;
   height: 23vw;
-  min-width: 255px;
-  min-height: 255px;
+  min-width: 170px;
+  min-height: 170px;
   box-shadow: 1px 1px 15px rgba(0,0,0,.5);
+  position: relative;
 
   & img {
     width: 100%;
@@ -79,8 +82,30 @@ const PhotoContainer = styled.figure`
   }
 `;
 
+const PaintKind = styled.figcaption`
+  width: 50%;
+  height: 50px;
+  background: ${(props) => props.themeProps.navBar};
+  position: absolute;
+  left: 50%;
+  bottom: -7%;
+  transform: translateX(-50%);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+`;
+
 export default function Menu() {
+  const { theme } = useContext(ThemeContext);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const paints = [person, illustration, oil, pop, oriental, western, modern, anime, piece];
+  const paintKinds = ['인물화', '일러스트', '유화', '팝아트', '동양화', '서양화', '현대미술', '애니메이션', '조각'];
 
   return (
     <>
@@ -91,9 +116,10 @@ export default function Menu() {
           <span>초상화부터 일러스트레이션, 애니메이션까지</span>
         </MenuIntroduction>
         <MenuGrid>
-          {paints.map((paint) => (
+          {paints.map((paint, index) => (
             <PhotoContainer>
               <img src={paint} alt="ori" width="50px" height="50px" />
+              <PaintKind themeProps={theme}><span>{paintKinds[index]}</span></PaintKind>
             </PhotoContainer>
           ))}
         </MenuGrid>

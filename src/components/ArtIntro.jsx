@@ -7,7 +7,7 @@ import Vincent from '../static/images/vincent.jpg';
 
 const ArtIntroContainer = styled.div`
   width: 100%;
-  height: 150vh;
+  height: 130vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,6 @@ const ArtIntroContainer = styled.div`
 const IntroSection = styled.section`
   width: 95%;
   height: 100%;
-  background: ${(props) => props.themeProps.body === '#fcfcfc' ? '#f0f3f3' :props.themeProps.body};
   transition: all 0.5s ease-in-out;
 `;
 
@@ -41,13 +40,13 @@ const ImageSection = styled.section`
   height: 50%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 const LeftImageSection = styled.figure`
-  width: 48%;
-  height: 100%;
+  width: 35%;
+  height: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,8 +55,8 @@ const LeftImageSection = styled.figure`
 `;
 
 const RightImageSection = styled.figure`
-  width: 48%;
-  height: 100%;
+  width: 35%;
+  height: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
