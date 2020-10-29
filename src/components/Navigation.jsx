@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import DarkModeToggle from './DarkModeToggle';
 import { ThemeContext } from '../App';
 import ScrollToTop from './ScrollToTop';
+import { Link } from 'react-router-dom';
 
 const NavContainer = styled.nav`
   width: 100%;
@@ -26,6 +27,7 @@ const NavContentContainer = styled.div`
 `;
 
 const TitleContainer = styled.header`
+ & a {
   height: 100%;
   font-size: 2rem;
   font-weight: 900;
@@ -35,6 +37,7 @@ const TitleContainer = styled.header`
   font-family: 'Dancing Script', cursive;
   color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
   transition: all 0.5s ease-in-out;
+ }
 `;
 
 const InfoContainer = styled.div`
@@ -78,7 +81,11 @@ export default function Navigation() {
   return (
     <NavContainer navBar={theme.navBar}>
       <NavContentContainer>
-        <TitleContainer themeProps={theme}>artmate</TitleContainer>
+        <TitleContainer themeProps={theme}>
+          <Link to='/'>
+            artmate
+          </Link>
+        </TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
           <LoginButton themeProps={theme}>로그인</LoginButton>
