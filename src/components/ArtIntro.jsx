@@ -117,7 +117,7 @@ export default function ArtIntro() {
           </RightImageSection>
         </ImageSection>
         <DetailButtonContainer>
-          <Link to='/art'>
+          <Link to='/menu'>
             <DetailButton themeProps={theme}>
               작품 구경하기
             </DetailButton>
