@@ -88,7 +88,9 @@ export default function Navigation() {
         </TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
-          <LoginButton themeProps={theme}>로그인</LoginButton>
+          <Link to='/login'>
+            <LoginButton themeProps={theme}>로그인</LoginButton>
+          </Link>
           <RegisterButton themeProps={theme}>회원가입</RegisterButton>
         </InfoContainer>
         <ScrollToTop />
