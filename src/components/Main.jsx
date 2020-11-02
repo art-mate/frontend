@@ -29,7 +29,7 @@ const ContentContainer = styled.section`
   align-items: center;
 `;
 
-const MainContent = styled.p`
+const MainContent = styled.div`
   color: white;
   font-size: 1.2rem;
   width: 80%;

@@ -21,7 +21,7 @@ const MenuContainer = styled.main`
   align-items: center;
 `;
 
-const MenuIntroduction = styled.p`
+const MenuIntroduction = styled.div`
   width: 100%;
   height: 250px;
   margin-top: 60px;
@@ -117,7 +117,7 @@ export default function Menu() {
         </MenuIntroduction>
         <MenuGrid>
           {paints.map((paint, index) => (
-            <PhotoContainer>
+            <PhotoContainer key={index}>
               <img src={paint} alt="ori" width="50px" height="50px" />
               <PaintKind themeProps={theme}><span>{paintKinds[index]}</span></PaintKind>
             </PhotoContainer>
