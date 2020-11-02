@@ -19,7 +19,7 @@ const IntroSection = styled.section`
   transition: all 0.5s ease-in-out;
 `;
 
-const ContentContainer = styled.p`
+const ContentContainer = styled.div`
   width: 100%;
   height: 25%;
   display: flex;

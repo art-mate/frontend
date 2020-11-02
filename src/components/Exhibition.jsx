@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ThemeContext } from '../App';
 import museum from '../static/images/museum.jpg';
 
 const ExhibitionContainer = styled.div`
@@ -26,7 +25,7 @@ const ContentContainer = styled.section`
   color: white;
 `;
 
-const MainContent = styled.p`
+const MainContent = styled.div`
   color: white;
   font-size: 1.2rem;
   width: 80%;
@@ -71,8 +70,6 @@ const DetailButton = styled.button`
 `;
 
 export default function Exhibition() {
-  const { theme } = useContext(ThemeContext);
-
   return (
     <ExhibitionContainer>
       <IntroSection>
