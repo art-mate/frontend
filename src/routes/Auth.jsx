@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { authService, firebaseInstance } from '../fBase';
+import { useHistory } from 'react-router-dom';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [newAccount, setNewAccount] = useState(true);
+  const history = useHistory();
 
   const onSubmit = async(event) => {
     event.preventDefault();
@@ -15,7 +17,7 @@ const Auth = () => {
         // create account
         data = await authService.createUserWithEmailAndPassword(email, password);
       } else {
-        // log in
+        // login
         data = await authService.signInWithEmailAndPassword(email, password);
       }
       console.log(data);
@@ -33,6 +35,8 @@ const Auth = () => {
     }
   }
 
+  const toggleAccount = () => setNewAccount((prev) => !prev);
+
   const onSocialClick = async (event) => {
     const { target: { name }} = event;
     let provider;
@@ -43,7 +47,8 @@ const Auth = () => {
     //   provider = new firebaseInstance.auth.FacebookAuthProvider();
     // }
     const data = await authService.signInWithPopup(provider);
-    console.log(data);
+    // console.log(data);
+    history.push('/');
   }
 
   return (
@@ -51,8 +56,9 @@ const Auth = () => {
       <form onSubmit={onSubmit}>
         <input name='email' type='email' placeholder='email' required value={email} onChange={onChange} />
         <input name='password' type='password' placeholder='password' required value={password} onChange={onChange} />
-        <input type='submit' value={newAccount ? '회원가입' : '로그인'} />
+        <input type='submit' value={newAccount ? "Create Account" : "Login"} />
       </form>
+      <span onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
       <div>
         <button name="google" onClick={onSocialClick}>Google</button>
         {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}

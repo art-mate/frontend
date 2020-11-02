@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import Router from './Router';
 import { GlobalStyle } from './global-styles';
 import { useDarkMode } from './hooks/useDarkMode';
@@ -12,14 +12,25 @@ export const ThemeContext = createContext({
 });
 
 function App() {
+  const [init, setInit] = useState(false);
   const [theme, toggleTheme] = useDarkMode();
-  const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+  const [userObj, setUserObj] = useState(null);
+
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setUserObj(user);
+      }
+      setInit(true);
+    });
+    // console.log(authService.currentUser);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <>
         <GlobalStyle theme={theme === lightTheme ? lightTheme : darkTheme} />
-        <Router isLoggedIn={isLoggedIn}/>
+        {init && <Router isLoggedIn={Boolean(userObj)} userObj={userObj}/>}
       </>
     </ThemeContext.Provider>
   );

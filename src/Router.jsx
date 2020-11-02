@@ -4,12 +4,12 @@ import Auth from './routes/Auth';
 import Home from './routes/Home';
 import Menu from './routes/Menu';
 
-export default function Router({ isLoggedIn }) {
+export default function Router({ isLoggedIn, userObj }) {
   return (
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Home} isLoggedIn={isLoggedIn}/>
+          <Route path="/" exact render={() => <Home userObj={userObj} />}/>
           <Route path="/menu" exact component={Menu} />
           <Route path='/login' exact component={Auth} />
         </Switch>

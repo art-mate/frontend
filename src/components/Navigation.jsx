@@ -76,7 +76,7 @@ const RegisterButton = styled.button`
   }
 `;
 
-export default function Navigation() {
+export default function Navigation({ userObj }) {
   const { theme } = useContext(ThemeContext);
   return (
     <NavContainer navBar={theme.navBar}>
@@ -88,10 +88,16 @@ export default function Navigation() {
         </TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
-          <Link to='/login'>
-            <LoginButton themeProps={theme}>로그인</LoginButton>
-          </Link>
-          <RegisterButton themeProps={theme}>회원가입</RegisterButton>
+          {userObj ? (
+            <Link to='/profile'>
+              <span>프로필</span>
+            </Link>
+          ) : (
+            <Link to='/login'>
+              <LoginButton themeProps={theme}>로그인</LoginButton>
+            </Link>
+          )}
+          {/* <RegisterButton themeProps={theme}>회원가입</RegisterButton> */}
         </InfoContainer>
         <ScrollToTop />
       </NavContentContainer>
