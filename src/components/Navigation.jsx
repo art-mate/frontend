@@ -76,7 +76,7 @@ const RegisterButton = styled.button`
   }
 `;
 
-export default function Navigation({ userObj }) {
+export default function Navigation({ isLoggedIn }) {
   const { theme } = useContext(ThemeContext);
   return (
     <NavContainer navBar={theme.navBar}>
@@ -88,9 +88,9 @@ export default function Navigation({ userObj }) {
         </TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
-          {userObj ? (
+          {isLoggedIn ? (
             <Link to='/profile'>
-              <span>프로필</span>
+              <button>프로필</button>
             </Link>
           ) : (
             <Link to='/login'>

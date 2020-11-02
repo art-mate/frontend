@@ -20,7 +20,7 @@ const Auth = () => {
         // login
         data = await authService.signInWithEmailAndPassword(email, password);
       }
-      console.log(data);
+      history.push('/');
     } catch(error) {
       setError(error.message);
     }
@@ -34,8 +34,6 @@ const Auth = () => {
       setPassword(value);
     }
   }
-
-  const toggleAccount = () => setNewAccount((prev) => !prev);
 
   const onSocialClick = async (event) => {
     const { target: { name }} = event;
@@ -56,9 +54,8 @@ const Auth = () => {
       <form onSubmit={onSubmit}>
         <input name='email' type='email' placeholder='email' required value={email} onChange={onChange} />
         <input name='password' type='password' placeholder='password' required value={password} onChange={onChange} />
-        <input type='submit' value={newAccount ? "Create Account" : "Login"} />
+        <input type='submit' value='로그인'/>
       </form>
-      <span onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
       <div>
         <button name="google" onClick={onSocialClick}>Google</button>
         {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}

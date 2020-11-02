@@ -23,7 +23,6 @@ function App() {
       }
       setInit(true);
     });
-    // console.log(authService.currentUser);
   }, []);
 
   return (
