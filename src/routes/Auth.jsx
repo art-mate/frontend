@@ -1,6 +1,104 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { authService, firebaseInstance } from '../fBase';
 import { useHistory } from 'react-router-dom';
+
+const AuthContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InputContainer = styled.div`
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.1);
+`;
+
+const SideContainer = styled.div`
+  width: 40%;
+  height: 100vh;
+  background: rgba(0,0,0,.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoginContainer = styled.div`
+  width: 100%;
+`;
+
+const LoginForm = styled.form`
+  max-width: 500px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InputWrap = styled.div`
+  width: 100%;
+  height: 80px;
+  & input {
+    padding: 15px;
+    width: 100%;
+    margin-top: 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.2);
+  }
+  & label {
+    font-size: .8rem;
+  }
+`;
+
+const LoginButtonWrap = styled.div`
+  width: 100%;
+  height: 80px;
+  & input {
+    padding: 15px;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background: #e6328d;
+    font-size: .8rem;
+    cursor: pointer;
+  }
+`;
+
+const GoogleLoginWrap = styled.div`
+  max-width: 500px;
+  width: 50%;
+  & button {
+    padding: 15px;
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-size: .8rem;
+    cursor: pointer;
+    background: #1f72eb;
+}
+`;
+
+const SideContent = styled.div`
+  width: 100%;
+  font-size: 6rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -44,23 +142,41 @@ const Auth = () => {
     // } else if (name === 'facebook') {
     //   provider = new firebaseInstance.auth.FacebookAuthProvider();
     // }
-    const data = await authService.signInWithPopup(provider);
+    await authService.signInWithPopup(provider);
     // console.log(data);
     history.push('/');
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input name='email' type='email' placeholder='email' required value={email} onChange={onChange} />
-        <input name='password' type='password' placeholder='password' required value={password} onChange={onChange} />
-        <input type='submit' value='로그인'/>
-      </form>
-      <div>
-        <button name="google" onClick={onSocialClick}>Google</button>
-        {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}
-      </div>
-    </div>  
+    <>
+      <AuthContainer>
+        <SideContainer>
+          <SideContent><span role='img' aria-labelledby='art'>🎨</span></SideContent>
+        </SideContainer>
+        <InputContainer>
+          <LoginForm onSubmit={onSubmit}>
+            <LoginContainer>
+              <InputWrap>
+                <label htmlFor='email'>이메일</label>
+                <input name='email' type='email' required value={email} onChange={onChange} />
+              </InputWrap>
+              <InputWrap>
+                <label htmlFor='password'>비밀번호</label>
+                <input name='password' type='password' required value={password} onChange={onChange} />
+              </InputWrap>
+            </LoginContainer>
+            <LoginButtonWrap>
+              <input type='submit' value='로그인'/>
+            </LoginButtonWrap>
+            <div/>
+          </LoginForm>
+          <GoogleLoginWrap>
+            <button name="google" onClick={onSocialClick}>구글 계정으로 로그인</button>
+            {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}
+          </GoogleLoginWrap>
+        </InputContainer>
+      </AuthContainer>
+    </>
   );
 }
 

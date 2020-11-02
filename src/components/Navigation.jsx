@@ -5,6 +5,9 @@ import { ThemeContext } from '../App';
 import ScrollToTop from './ScrollToTop';
 import { Link } from 'react-router-dom';
 
+import { FaUserCircle } from 'react-icons/fa';
+import { AiOutlineEllipsis } from 'react-icons/ai';
+
 const NavContainer = styled.nav`
   width: 100%;
   height: 60px;
@@ -44,35 +47,32 @@ const InfoContainer = styled.div`
   width: 250px;
   height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 `;
 
 const LoginButton = styled.button`
   width: 90px;
   height: 40px;
-  border-radius: 30px;
   font-size: 14px;
   color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#363537':'#fafafa'};
-  border: 1px solid #fafafa;
+  background: none;
+  border: none;
   &:hover {
-    background: #fafafa;
-    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#363537'};
+    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
     transition: all 0.1s ease-in-out;
   }
 `;
 
-const RegisterButton = styled.button`
-  width: 90px;
-  height: 40px;
-  border-radius: 30px;
-  font-size: 14px;
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#363537':'#fafafa'};
-  border: 1px solid #fafafa;
-  &:hover {
-    background: #fafafa;
-    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#363537'};
-    transition: all 0.1s ease-in-out;
+const ProfileWrap = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & svg {
+    color: ${(props) => props.text};
   }
 `;
 
@@ -89,15 +89,19 @@ export default function Navigation({ isLoggedIn }) {
         <DarkModeToggle />
         <InfoContainer>
           {isLoggedIn ? (
-            <Link to='/profile'>
-              <button>프로필</button>
-            </Link>
+            <>
+              <Link to='/profile'>
+                <ProfileWrap text={theme.text}>
+                  <FaUserCircle size={25} />
+                </ProfileWrap>
+              </Link>
+              <AiOutlineEllipsis size={33} />
+            </>
           ) : (
             <Link to='/login'>
               <LoginButton themeProps={theme}>로그인</LoginButton>
             </Link>
           )}
-          {/* <RegisterButton themeProps={theme}>회원가입</RegisterButton> */}
         </InfoContainer>
         <ScrollToTop />
       </NavContentContainer>

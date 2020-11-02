@@ -7,8 +7,9 @@ const Profile = () => {
   const history = useHistory();
 
   const onLogOutClick = () => {
-    authService.signOut();
-    history.push('/');
+    authService.signOut().then(
+      history.push('/')
+    );
   }
 
   return (
