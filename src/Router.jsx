@@ -13,7 +13,7 @@ export default function Router({ isLoggedIn, userObj }) {
           <Route path="/" exact render={() => <Home isLoggedIn={isLoggedIn} />}></Route>
           <Route path="/menu" exact component={Menu}></Route>
           <Route path='/login' exact component={Auth}></Route>
-          <Route path='/profile' exact component={Profile}></Route>
+          <Route path='/profile' exact render={() => <Profile userObj={userObj} />}></Route>
         </Switch>
       </BrowserRouter>
     </>
