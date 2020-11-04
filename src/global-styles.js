@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
         transition: all 0.5s ease-in-out;
     }
     button {
+        color: ${({ theme }) => theme.text};
         cursor: pointer;
         border: 1px solid ${({ theme }) => theme.toggleBorder};
         outline: none;

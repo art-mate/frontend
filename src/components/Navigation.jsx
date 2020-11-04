@@ -65,8 +65,8 @@ const LoginButton = styled.button`
 `;
 
 const ProfileWrap = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +95,9 @@ export default function Navigation({ isLoggedIn }) {
                   <FaUserCircle size={25} />
                 </ProfileWrap>
               </Link>
-              <AiOutlineEllipsis size={33} />
+              <ProfileWrap text={theme.text}>
+                <AiOutlineEllipsis size={33} />
+              </ProfileWrap>
             </>
           ) : (
             <Link to='/login'>

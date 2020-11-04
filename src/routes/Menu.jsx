@@ -97,7 +97,7 @@ const PaintKind = styled.figcaption`
   box-shadow: 0px 5px 15px rgba(0,0,0,.5);
 `;
 
-export default function Menu() {
+export default function Menu({ userObj }) {
   const { theme } = useContext(ThemeContext);
   
   useEffect(() => {
@@ -109,7 +109,7 @@ export default function Menu() {
 
   return (
     <>
-      <Navigation />
+      <Navigation isLoggedIn={Boolean(userObj)}/>
       <MenuContainer>
         <MenuIntroduction>
           <SubHead>모든 작품들을 한 눈에</SubHead>
