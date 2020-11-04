@@ -10,10 +10,22 @@ export default function Router({ isLoggedIn, userObj }) {
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact render={() => <Home isLoggedIn={isLoggedIn} />}></Route>
-          <Route path="/menu" exact render={() => <Menu userObj={userObj} />}></Route>
-          <Route path='/login' exact component={Auth}></Route>
-          <Route path='/profile' exact render={() => <Profile userObj={userObj} />}></Route>
+          <Route
+            path="/"
+            exact
+            render={() => <Home isLoggedIn={isLoggedIn} />}
+          ></Route>
+          <Route
+            path="/menu"
+            exact
+            render={() => <Menu userObj={userObj} />}
+          ></Route>
+          <Route path="/login" exact component={Auth}></Route>
+          <Route
+            path="/profile"
+            exact
+            render={() => <Profile userObj={userObj} />}
+          ></Route>
         </Switch>
       </BrowserRouter>
     </>

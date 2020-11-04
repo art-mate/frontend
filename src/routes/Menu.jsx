@@ -1,4 +1,4 @@
-import React, { useContext, useEffect }from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ThemeContext } from '../App';
 
 import styled from 'styled-components';
@@ -64,7 +64,7 @@ const PhotoContainer = styled.figure`
   height: 23vw;
   min-width: 170px;
   min-height: 170px;
-  box-shadow: 1px 1px 15px rgba(0,0,0,.5);
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
   position: relative;
 
   & img {
@@ -94,22 +94,42 @@ const PaintKind = styled.figcaption`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 5px 15px rgba(0,0,0,.5);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 `;
 
 export default function Menu({ userObj }) {
   const { theme } = useContext(ThemeContext);
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const paints = [person, illustration, oil, pop, oriental, western, modern, anime, piece];
-  const paintKinds = ['인물화', '일러스트', '유화', '팝아트', '동양화', '서양화', '현대미술', '애니메이션', '조각'];
+  const paints = [
+    person,
+    illustration,
+    oil,
+    pop,
+    oriental,
+    western,
+    modern,
+    anime,
+    piece,
+  ];
+  const paintKinds = [
+    '인물화',
+    '일러스트',
+    '유화',
+    '팝아트',
+    '동양화',
+    '서양화',
+    '현대미술',
+    '애니메이션',
+    '조각',
+  ];
 
   return (
     <>
-      <Navigation isLoggedIn={Boolean(userObj)}/>
+      <Navigation isLoggedIn={Boolean(userObj)} />
       <MenuContainer>
         <MenuIntroduction>
           <SubHead>모든 작품들을 한 눈에</SubHead>
@@ -119,7 +139,9 @@ export default function Menu({ userObj }) {
           {paints.map((paint, index) => (
             <PhotoContainer key={index}>
               <img src={paint} alt="ori" width="50px" height="50px" />
-              <PaintKind themeProps={theme}><span>{paintKinds[index]}</span></PaintKind>
+              <PaintKind themeProps={theme}>
+                <span>{paintKinds[index]}</span>
+              </PaintKind>
             </PhotoContainer>
           ))}
         </MenuGrid>

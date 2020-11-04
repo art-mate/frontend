@@ -15,14 +15,20 @@ const ToggleButton = styled.button`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background: ${(props) => props.themeProps.body === '#fcfcfc' ? props.themeProps.body:'#353535'};
-  border: 1px solid ${(props) => props.themeProps.body === '#fcfcfc' ? 'rgba(0,0,0,.01)':'#353535'};
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#363537':'#fcfcfc'};
-  box-shadow: 2px 2px 10px rgba(0,0,0,.3);
+  background: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? props.themeProps.body : '#353535'};
+  border: 1px solid
+    ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? 'rgba(0,0,0,.01)' : '#353535'};
+  color: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? '#363537' : '#fcfcfc'};
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   z-index: 10000;
 
   &:hover {
-    filter: brightness(${(props) => props.themeProps.body === '#fcfcfc' ? '0.9':'1.13'});
+    filter: brightness(
+      ${(props) => (props.themeProps.body === '#fcfcfc' ? '0.9' : '1.13')}
+    );
   }
 `;
 

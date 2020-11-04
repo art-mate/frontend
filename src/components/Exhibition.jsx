@@ -76,19 +76,17 @@ export default function Exhibition() {
         <div
           style={{
             backgroundImage: `url('${museum}')`,
-            width: "100%",
-            height: "100%",
-            backgroundSize: "cover",
-            backgroundPosition: "center, center",
-            backgroundRepeat: "no-repeat",
+            width: '100%',
+            height: '100%',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center, center',
+            backgroundRepeat: 'no-repeat',
             filter: 'brightness(0.5)',
           }}
         ></div>
         <ContentContainer>
           <MainContent>
-            <SubHead>
-              3D 전시관
-            </SubHead>
+            <SubHead>3D 전시관</SubHead>
             <span>실제 전시된 것 같은 기분</span>
             <span>미술관에서 보는 느낌을 느껴보세요.</span>
             <DetailButton>3D 전시관 보러가기</DetailButton>
