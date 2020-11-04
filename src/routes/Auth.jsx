@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { authService, firebaseInstance } from '../fBase';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import googleLogo from '../static/images/googleLogo.svg';
 
 const AuthContainer = styled.div`
@@ -88,7 +88,7 @@ const GoogleLoginWrap = styled.div`
     align-items: center;
     width: 100%;
     height: 47px;
-    margin-top: 12px;
+    margin-top: 10px;
     border-radius: 8px;
     border: 2px solid #1f72eb;
     font-size: 0.8rem;
@@ -118,11 +118,52 @@ const ErrorMsgWrap = styled.div`
   font-weight: bold;
 `;
 
+const CheckNewUserContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  background: rgba(86, 86, 86, 0.3);
+  backdrop-filter: blur(6px);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: ${(props) => (props.checkUser ? 'none' : 'flex')};
+  justify-content: center;
+  align-items: center;
+`;
+
+const CheckNewUserWrap = styled.div`
+  width: 400px;
+  height: 330px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  & button {
+    padding: 15px;
+    width: 60%;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background: #e6328d;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  & span {
+    font-size: 2.5rem;
+  }
+`;
+
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [newAccount, setNewAccount] = useState(true);
+  const [checkUser, setCheckUser] = useState(false);
   const history = useHistory();
 
   const onSubmit = async (event) => {
@@ -173,9 +214,33 @@ const Auth = () => {
     history.push('/');
   };
 
+  const onLoginClick = () => {
+    setNewAccount(false);
+    setCheckUser((prev) => !prev);
+  };
+
+  const onRegisterClick = () => {
+    setNewAccount(true);
+    setCheckUser((prev) => !prev);
+  };
+
   return (
     <>
       <AuthContainer>
+        <CheckNewUserContainer checkUser={checkUser}>
+          <CheckNewUserWrap>
+            <span role="img" aria-labelledby="art">
+              🧑‍🎨
+            </span>
+            <button onClick={onLoginClick}>로그인</button>
+            <button
+              style={{ background: 'white', color: 'black' }}
+              onClick={onRegisterClick}
+            >
+              회원가입
+            </button>
+          </CheckNewUserWrap>
+        </CheckNewUserContainer>
         <SideContainer>
           <SideContent>
             <span role="img" aria-labelledby="art">
@@ -215,10 +280,15 @@ const Auth = () => {
                 />
               </InputWrap>
             </LoginContainer>
-            <LoginButtonWrap>
-              <input type="submit" value="로그인" />
-            </LoginButtonWrap>
-            <div />
+            {newAccount ? (
+              <LoginButtonWrap>
+                <input type="submit" value="회원가입" />
+              </LoginButtonWrap>
+            ) : (
+              <LoginButtonWrap>
+                <input type="submit" value="로그인" />
+              </LoginButtonWrap>
+            )}
           </LoginForm>
           <GoogleLoginWrap>
             <button name="google" onClick={onSocialClick}>
