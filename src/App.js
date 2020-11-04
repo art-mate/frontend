@@ -29,7 +29,7 @@ function App() {
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <>
         <GlobalStyle theme={theme === lightTheme ? lightTheme : darkTheme} />
-        {init && <Router isLoggedIn={Boolean(userObj)} userObj={userObj}/>}
+        {init && <Router isLoggedIn={Boolean(userObj)} userObj={userObj} />}
       </>
     </ThemeContext.Provider>
   );

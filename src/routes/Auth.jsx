@@ -20,13 +20,13 @@ const InputContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,.1);
+  background: rgba(0, 0, 0, 0.1);
 `;
 
 const SideContainer = styled.div`
   width: 40%;
   height: 100vh;
-  background: rgba(0,0,0,.1);
+  background: rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,10 +54,10 @@ const InputWrap = styled.div`
     width: 100%;
     margin-top: 3px;
     border-radius: 8px;
-    border: 1px solid rgba(0,0,0,.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
   & label {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -72,7 +72,7 @@ const LoginButtonWrap = styled.div`
     border: none;
     color: white;
     background: #e6328d;
-    font-size: .8rem;
+    font-size: 0.8rem;
     cursor: pointer;
   }
 `;
@@ -91,7 +91,7 @@ const GoogleLoginWrap = styled.div`
     margin-top: 12px;
     border-radius: 8px;
     border: 2px solid #1f72eb;
-    font-size: .8rem;
+    font-size: 0.8rem;
     cursor: pointer;
     background: white;
   }
@@ -125,35 +125,42 @@ const Auth = () => {
   const [newAccount, setNewAccount] = useState(true);
   const history = useHistory();
 
-  const onSubmit = async(event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     try {
       let data;
       if (newAccount) {
         // create account
-        data = await authService.createUserWithEmailAndPassword(email, password);
+        data = await authService.createUserWithEmailAndPassword(
+          email,
+          password,
+        );
       } else {
         // login
         data = await authService.signInWithEmailAndPassword(email, password);
       }
       history.push('/');
-    } catch(error) {
+    } catch (error) {
       setError(error.message);
       alert(error.message);
     }
-  }
+  };
 
   const onChange = (event) => {
-    const { target: { name, value }} = event;
+    const {
+      target: { name, value },
+    } = event;
     if (name === 'email') {
       setEmail(value);
     } else if (name === 'password') {
       setPassword(value);
     }
-  }
+  };
 
   const onSocialClick = async (event) => {
-    const { target: { name }} = event;
+    const {
+      target: { name },
+    } = event;
     let provider;
     if (name === 'google') {
       provider = new firebaseInstance.auth.GoogleAuthProvider();
@@ -164,40 +171,58 @@ const Auth = () => {
     await authService.signInWithPopup(provider);
     // console.log(data);
     history.push('/');
-  }
+  };
 
   return (
     <>
       <AuthContainer>
         <SideContainer>
-          <SideContent><span role='img' aria-labelledby='art'>🎨</span></SideContent>
+          <SideContent>
+            <span role="img" aria-labelledby="art">
+              🎨
+            </span>
+          </SideContent>
         </SideContainer>
         <InputContainer>
           <LoginForm onSubmit={onSubmit}>
-            {error && 
+            {error && (
               <ErrorMsgWrap>
-                <span role='img' aria-labelledby='error'>🙅 </span>
+                <span role="img" aria-labelledby="error">
+                  🙅{' '}
+                </span>
                 {error}
               </ErrorMsgWrap>
-            }
+            )}
             <LoginContainer>
               <InputWrap>
-                <label htmlFor='email'>이메일</label>
-                <input name='email' type='email' required value={email} onChange={onChange} />
+                <label htmlFor="email">이메일</label>
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={onChange}
+                />
               </InputWrap>
               <InputWrap>
-                <label htmlFor='password'>비밀번호</label>
-                <input name='password' type='password' required value={password} onChange={onChange} />
+                <label htmlFor="password">비밀번호</label>
+                <input
+                  name="password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={onChange}
+                />
               </InputWrap>
             </LoginContainer>
             <LoginButtonWrap>
-              <input type='submit' value='로그인'/>
+              <input type="submit" value="로그인" />
             </LoginButtonWrap>
-            <div/>
+            <div />
           </LoginForm>
           <GoogleLoginWrap>
             <button name="google" onClick={onSocialClick}>
-              <img src={googleLogo} alt='google' />
+              <img src={googleLogo} alt="google" />
               구글 계정으로 로그인
             </button>
             {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}
@@ -206,6 +231,6 @@ const Auth = () => {
       </AuthContainer>
     </>
   );
-}
+};
 
 export default Auth;

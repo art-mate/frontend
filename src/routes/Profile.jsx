@@ -20,7 +20,7 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid rgba(0,0,0,.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 const InfoWrap = styled.div`
@@ -53,7 +53,7 @@ const MyPaintContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid rgba(0,0,0,.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 1.5rem;
 
   & button {
@@ -75,10 +75,8 @@ const Profile = ({ userObj }) => {
   const history = useHistory();
 
   const onLogOutClick = () => {
-    authService.signOut().then(
-      history.push('/')
-    );
-  }
+    authService.signOut().then(history.push('/'));
+  };
 
   return (
     <>
@@ -86,28 +84,40 @@ const Profile = ({ userObj }) => {
         <InfoContainer>
           <InfoWrap>
             <span>안녕하세요</span>
-            <span role='img' aria-labelledby='art' style={{fontWeight:'bold', marginTop:'15px'}}>{userObj.displayName}님 🧑‍🎨</span>
+            <span
+              role="img"
+              aria-labelledby="art"
+              style={{ fontWeight: 'bold', marginTop: '15px' }}
+            >
+              {userObj.displayName}님 🧑‍🎨
+            </span>
           </InfoWrap>
         </InfoContainer>
         <MyPaintContainer>
-          <span role='img' aria-labelledby='art'>🎨</span>
+          <span role="img" aria-labelledby="art">
+            🎨
+          </span>
           <button> 내 작품 보러가기</button>
         </MyPaintContainer>
         <MenuContainer>
           <MenuWrap>
-            <span role='img' aria-labelledby='logout'>❌</span>
+            <span role="img" aria-labelledby="logout">
+              ❌
+            </span>
             <button onClick={onLogOutClick}> 로그아웃</button>
           </MenuWrap>
           <MenuWrap>
-            <span role='img' aria-labelledby='home'>🏡</span>
-            <Link to='/'>
+            <span role="img" aria-labelledby="home">
+              🏡
+            </span>
+            <Link to="/">
               <button> 홈으로 가기</button>
             </Link>
           </MenuWrap>
         </MenuContainer>
       </ProfileContainer>
     </>
-  )
+  );
 };
 
 export default Profile;

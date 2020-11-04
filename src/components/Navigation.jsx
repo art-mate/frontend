@@ -30,17 +30,18 @@ const NavContentContainer = styled.div`
 `;
 
 const TitleContainer = styled.header`
- & a {
-  height: 100%;
-  font-size: 2rem;
-  font-weight: 900;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Dancing Script', cursive;
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
-  transition: all 0.5s ease-in-out;
- }
+  & a {
+    height: 100%;
+    font-size: 2rem;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Dancing Script', cursive;
+    color: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -55,11 +56,13 @@ const LoginButton = styled.button`
   width: 90px;
   height: 40px;
   font-size: 14px;
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#363537':'#fafafa'};
+  color: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? '#363537' : '#fafafa'};
   background: none;
   border: none;
   &:hover {
-    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+    color: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -82,15 +85,13 @@ export default function Navigation({ isLoggedIn }) {
     <NavContainer navBar={theme.navBar}>
       <NavContentContainer>
         <TitleContainer themeProps={theme}>
-          <Link to='/'>
-            artmate
-          </Link>
+          <Link to="/">artmate</Link>
         </TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
           {isLoggedIn ? (
             <>
-              <Link to='/profile'>
+              <Link to="/profile">
                 <ProfileWrap text={theme.text}>
                   <FaUserCircle size={25} />
                 </ProfileWrap>
@@ -100,7 +101,7 @@ export default function Navigation({ isLoggedIn }) {
               </ProfileWrap>
             </>
           ) : (
-            <Link to='/login'>
+            <Link to="/login">
               <LoginButton themeProps={theme}>로그인</LoginButton>
             </Link>
           )}

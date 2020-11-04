@@ -51,7 +51,7 @@ const LeftImageSection = styled.figure`
   justify-content: center;
   align-items: center;
   position: relative;
-  box-shadow: 0 0 15px rgba(0,0,0,.7)
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 `;
 
 const RightImageSection = styled.figure`
@@ -60,7 +60,7 @@ const RightImageSection = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 15px rgba(0,0,0,.7)
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 `;
 
 const DetailButtonContainer = styled.div`
@@ -77,11 +77,14 @@ const DetailButton = styled.button`
   border-radius: 30px;
   font-size: 14px;
   margin-top: 15px;
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+  color: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
   background: none;
   &:hover {
-    background: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
-    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#fafafa':'#363537'};
+    background: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+    color: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? '#fafafa' : '#363537'};
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -100,26 +103,22 @@ export default function ArtIntro() {
     <ArtIntroContainer>
       <IntroSection themeProps={theme}>
         <ContentContainer>
-          <SubHead>
-            모든 전공의 예술 작품
-          </SubHead>
+          <SubHead>모든 전공의 예술 작품</SubHead>
           <span>동양화, 서양화 등을 비롯한 모든 그림</span>
           <span>조소전공을 위한 조각 작품</span>
           <span>찾고있는 분야의 작품을 지금 바로 구경해보세요.</span>
         </ContentContainer>
         <ImageSection>
           <LeftImageSection>
-            <img src={Vincent} alt='vincent'/>
+            <img src={Vincent} alt="vincent" />
           </LeftImageSection>
           <RightImageSection>
-            <img src={Pieta} alt='pieta'/>
+            <img src={Pieta} alt="pieta" />
           </RightImageSection>
         </ImageSection>
         <DetailButtonContainer>
-          <Link to='/menu'>
-            <DetailButton themeProps={theme}>
-              작품 구경하기
-            </DetailButton>
+          <Link to="/menu">
+            <DetailButton themeProps={theme}>작품 구경하기</DetailButton>
           </Link>
         </DetailButtonContainer>
       </IntroSection>

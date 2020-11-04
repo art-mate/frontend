@@ -7,7 +7,7 @@ import Navigation from '../components/Navigation';
 export default function Home({ isLoggedIn }) {
   return (
     <React.Fragment>
-      <Navigation isLoggedIn={isLoggedIn}/>
+      <Navigation isLoggedIn={isLoggedIn} />
       <Main />
       <ArtIntro />
       <Exhibition />

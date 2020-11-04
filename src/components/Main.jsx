@@ -57,11 +57,14 @@ const DetailButton = styled.button`
   border-radius: 30px;
   font-size: 14px;
   margin-top: 15px;
-  color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
+  color: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
   background: none;
   &:hover {
-    background: ${(props) => props.themeProps.body === '#fcfcfc' ? '#e6328d':'#fafafa'};
-    color: ${(props) => props.themeProps.body === '#fcfcfc' ? '#fafafa':'#363537'};
+    background: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+    color: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? '#fafafa' : '#363537'};
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -82,9 +85,7 @@ export default function Main() {
       <IntroSection>
         <ContentContainer>
           <MainContent>
-            <SubHead>
-              모든 예술가를 위한 플랫폼
-            </SubHead>
+            <SubHead>모든 예술가를 위한 플랫폼</SubHead>
             <span>당신의 작품과 새로운 영감을 위해</span>
             <span>보관하고 싶은 작품을 영구적으로 마음껏</span>
             <span>보고싶은 작품을 간편하게</span>
@@ -92,7 +93,7 @@ export default function Main() {
           <DetailButton themeProps={theme}>더 알아보기</DetailButton>
         </ContentContainer>
         <ImageSection>
-          <img src={Parel_girl} alt="parel"/>
+          <img src={Parel_girl} alt="parel" />
           {/* <figcaption style={{position:'absolute', left:'50%', bottom:'10px', color: 'white', fontSize:'10px'}}>진주 귀걸이를 한 소녀</figcaption> */}
         </ImageSection>
       </IntroSection>
