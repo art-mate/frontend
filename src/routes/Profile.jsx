@@ -39,7 +39,6 @@ const MenuContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-
   & button {
     background: none;
     border: none;
@@ -55,7 +54,6 @@ const MyPaintContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 1.5rem;
-
   & button {
     background: none;
     border: none;
@@ -84,13 +82,23 @@ const Profile = ({ userObj }) => {
         <InfoContainer>
           <InfoWrap>
             <span>안녕하세요</span>
-            <span
-              role="img"
-              aria-labelledby="art"
-              style={{ fontWeight: 'bold', marginTop: '15px' }}
-            >
-              {userObj.displayName}님 🧑‍🎨
-            </span>
+            {userObj.displayName ? (
+              <span
+                role="img"
+                aria-labelledby="art"
+                style={{ fontWeight: 'bold', marginTop: '15px' }}
+              >
+                {userObj.displayName}님 🧑‍🎨
+              </span>
+            ) : (
+              <span
+                role="img"
+                aria-labelledby="art"
+                style={{ fontWeight: 'bold', marginTop: '15px' }}
+              >
+                {userObj.email}님 🧑‍🎨
+              </span>
+            )}
           </InfoWrap>
         </InfoContainer>
         <MyPaintContainer>
@@ -119,5 +127,4 @@ const Profile = ({ userObj }) => {
     </>
   );
 };
-
 export default Profile;
