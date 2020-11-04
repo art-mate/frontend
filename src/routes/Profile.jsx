@@ -101,18 +101,18 @@ const Profile = ({ userObj }) => {
         </MyPaintContainer>
         <MenuContainer>
           <MenuWrap>
-            <span role="img" aria-labelledby="logout">
-              ❌
-            </span>
-            <button onClick={onLogOutClick}> 로그아웃</button>
-          </MenuWrap>
-          <MenuWrap>
             <span role="img" aria-labelledby="home">
               🏡
             </span>
             <Link to="/">
               <button> 홈으로 가기</button>
             </Link>
+          </MenuWrap>
+          <MenuWrap>
+            <span role="img" aria-labelledby="logout">
+              ❌
+            </span>
+            <button onClick={onLogOutClick}> 로그아웃</button>
           </MenuWrap>
         </MenuContainer>
       </ProfileContainer>
