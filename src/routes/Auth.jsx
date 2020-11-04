@@ -94,6 +94,7 @@ const GoogleLoginWrap = styled.div`
     font-size: 0.8rem;
     cursor: pointer;
     background: white;
+    color: #363537;
   }
 
   & img {
