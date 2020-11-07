@@ -121,6 +121,14 @@ export default function Menu({ userObj }) {
                 <h4>{post.artist}</h4>
                 <h4>{post.description}</h4>
                 <h4>{post.price}</h4>
+                {post.attachmentUrl && (
+                  <img
+                    src={post.attachmentUrl}
+                    alt="attachment"
+                    width="50px"
+                    height="50px"
+                  />
+                )}
               </div>
             ))}
           </div>

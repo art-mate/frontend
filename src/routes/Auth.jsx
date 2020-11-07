@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { authService, firebaseInstance } from '../fBase';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import googleLogo from '../static/images/googleLogo.svg';
 
 const AuthContainer = styled.div`
@@ -36,8 +36,20 @@ const LoginContainer = styled.div`
   width: 100%;
 `;
 
+const LoginFormWrap = styled.div`
+  width: 58%;
+  height: 450px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.4);
+`;
+
 const LoginForm = styled.form`
-  max-width: 500px;
+  max-width: 550px;
   min-width: 420px;
   width: 50%;
   display: flex;
@@ -115,8 +127,7 @@ const SideContent = styled.div`
 const ErrorMsgWrap = styled.div`
   width: 100%;
   height: 40px;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 0.8rem;
 `;
 
 const CheckNewUserContainer = styled.div`
@@ -157,6 +168,17 @@ const CheckNewUserWrap = styled.div`
   & span {
     font-size: 2.5rem;
   }
+`;
+
+const SignInContentWrap = styled.div`
+  width: 100%;
+  height: 40px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
 `;
 
 const Auth = () => {
@@ -250,54 +272,61 @@ const Auth = () => {
           </SideContent>
         </SideContainer>
         <InputContainer>
-          <LoginForm onSubmit={onSubmit}>
-            {error && (
-              <ErrorMsgWrap>
-                <span role="img" aria-labelledby="error">
-                  🙅{' '}
-                </span>
-                {error}
-              </ErrorMsgWrap>
-            )}
-            <LoginContainer>
-              <InputWrap>
-                <label htmlFor="email">이메일</label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={onChange}
-                />
-              </InputWrap>
-              <InputWrap>
-                <label htmlFor="password">비밀번호</label>
-                <input
-                  name="password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={onChange}
-                />
-              </InputWrap>
-            </LoginContainer>
-            {newAccount ? (
-              <LoginButtonWrap>
-                <input type="submit" value="회원가입" />
-              </LoginButtonWrap>
-            ) : (
-              <LoginButtonWrap>
-                <input type="submit" value="로그인" />
-              </LoginButtonWrap>
-            )}
-          </LoginForm>
-          <GoogleLoginWrap>
-            <button name="google" onClick={onSocialClick}>
-              <img src={googleLogo} alt="google" />
-              구글 계정으로 로그인
-            </button>
-            {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}
-          </GoogleLoginWrap>
+          <LoginFormWrap>
+            <LoginForm onSubmit={onSubmit}>
+              {newAccount ? (
+                <SignInContentWrap>회원가입</SignInContentWrap>
+              ) : (
+                <SignInContentWrap>로그인</SignInContentWrap>
+              )}
+              {error && (
+                <ErrorMsgWrap>
+                  <span role="img" aria-labelledby="error">
+                    🙅{' '}
+                  </span>
+                  {error}
+                </ErrorMsgWrap>
+              )}
+              <LoginContainer>
+                <InputWrap>
+                  <label htmlFor="email">이메일</label>
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={onChange}
+                  />
+                </InputWrap>
+                <InputWrap>
+                  <label htmlFor="password">비밀번호</label>
+                  <input
+                    name="password"
+                    type="password"
+                    required
+                    value={password}
+                    onChange={onChange}
+                  />
+                </InputWrap>
+              </LoginContainer>
+              {newAccount ? (
+                <LoginButtonWrap>
+                  <input type="submit" value="회원가입" />
+                </LoginButtonWrap>
+              ) : (
+                <LoginButtonWrap>
+                  <input type="submit" value="로그인" />
+                </LoginButtonWrap>
+              )}
+            </LoginForm>
+            <GoogleLoginWrap>
+              <button name="google" onClick={onSocialClick}>
+                <img src={googleLogo} alt="google" />
+                구글 계정으로 로그인
+              </button>
+              {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}
+            </GoogleLoginWrap>
+          </LoginFormWrap>
         </InputContainer>
       </AuthContainer>
     </>

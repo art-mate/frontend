@@ -46,11 +46,11 @@ const UploadToggle = ({ userObj }) => {
     <>
       {userObj ? (
         <Link to="/upload">
-          <UploadButton themeProps={theme}>내 작품 업로드하기</UploadButton>
+          <UploadButton themeProps={theme}>작품 업로드하기</UploadButton>
         </Link>
       ) : (
         <UploadButton themeProps={theme} onClick={handleClick}>
-          내 작품 업로드하기
+          작품 업로드하기
         </UploadButton>
       )}
     </>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { dbService } from '../fBase';
+import { dbService, storageService } from '../fBase';
+import { v4 as uuidv4 } from 'uuid';
 
 const PaintUploadModal = styled.div`
   width: 100%;
@@ -16,22 +17,32 @@ const PaintUpload = ({ userObj }) => {
   const [artist, setArtist] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
+  const [attachment, setAttachment] = useState();
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    let attachmentUrl = '';
+    if (attachment !== '') {
+      const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+      const response = await fileRef.putString(attachment, 'data_url');
+      attachmentUrl = await response.ref.getDownloadURL();
+    }
+    const paintObj = {
+      paintName: paint,
+      artist: artist,
+      price: price,
+      description: description,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
     await dbService
       .collection('paints')
-      .add({
-        paintName: paint,
-        artist: artist,
-        price: price,
-        description: description,
-        createdAt: Date.now(),
-        creatorId: userObj.uid,
-      })
+      .add(paintObj)
       .then(() => alert('완료'))
       .catch((error) => alert(error.message));
     setPaint('');
+    setAttachment('');
   };
 
   const onChange = (event) => {
@@ -56,9 +67,16 @@ const PaintUpload = ({ userObj }) => {
     const file = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
-      console.log(finishedEvent);
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
     };
     reader.readAsDataURL(file);
+  };
+
+  const onClearAttachment = () => {
+    setAttachment(null);
   };
 
   return (
@@ -97,6 +115,12 @@ const PaintUpload = ({ userObj }) => {
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="등록" />
+        {attachment && (
+          <div>
+            <img src={attachment} alt="attachment" width="50px" height="50px" />
+            <button onClick={onClearAttachment}>업로드 취소</button>
+          </div>
+        )}
       </form>
       <Link to="/">
         <button>Cancel</button>
