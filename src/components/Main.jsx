@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
-import Parel_girl from '../static/images/Parel_girl.jpg';
+import MainImage from '../static/images/mainImage.png';
 
 const MainContainer = styled.main`
   width: 100%;
@@ -93,7 +93,7 @@ export default function Main() {
           <DetailButton themeProps={theme}>더 알아보기</DetailButton>
         </ContentContainer>
         <ImageSection>
-          <img src={Parel_girl} alt="parel" />
+          <img src={MainImage} alt="main" />
           {/* <figcaption style={{position:'absolute', left:'50%', bottom:'10px', color: 'white', fontSize:'10px'}}>진주 귀걸이를 한 소녀</figcaption> */}
         </ImageSection>
       </IntroSection>
