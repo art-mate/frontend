@@ -1,9 +1,8 @@
 import React from 'react';
-import ArtIntro from '../components/ArtIntro';
 import Main from '../components/Main';
-import Exhibition from '../components/Exhibition';
 import Navigation from '../components/Navigation';
 import Menu from './Menu';
+import PaintUpload from '../components/PaintUpload';
 
 export default function Home({ isLoggedIn }) {
   return (
@@ -11,6 +10,7 @@ export default function Home({ isLoggedIn }) {
       <Navigation isLoggedIn={isLoggedIn} />
       <Main />
       <Menu />
+      <PaintUpload />
     </React.Fragment>
   );
 }
