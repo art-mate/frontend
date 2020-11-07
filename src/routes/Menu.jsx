@@ -93,19 +93,14 @@ export default function Menu({ userObj }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getPosts();
-  }, []);
-
-  const getPosts = async () => {
-    const dbPosts = await dbService.collection('paints').get();
-    dbPosts.forEach((document) => {
-      const postObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setPosts((prev) => [document.data(), ...prev]);
+    dbService.collection('paints').onSnapshot((snapshot) => {
+      const postArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPosts(postArray);
     });
-  };
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -113,7 +108,7 @@ export default function Menu({ userObj }) {
 
   return (
     <>
-      <Navigation isLoggedIn={Boolean(userObj)} />
+      <Navigation userObj={userObj} />
       <MenuContainer>
         <MenuIntroduction>
           <div>Collections Goods</div>

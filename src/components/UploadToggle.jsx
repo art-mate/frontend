@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
+import PaintUpload from './PaintUpload';
 
 const UploadButton = styled.button`
   position: fixed;

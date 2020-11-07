@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { FaUserCircle } from 'react-icons/fa';
 import { AiOutlineEllipsis } from 'react-icons/ai';
+import SideMenu from './SideMenu';
 
 const NavContainer = styled.nav`
   width: 100%;
@@ -108,6 +109,7 @@ export default function Navigation({ userObj }) {
         </InfoContainer>
         <ScrollToTop />
       </NavContentContainer>
+      {/* <SideMenu /> */}
     </NavContainer>
   );
 }
