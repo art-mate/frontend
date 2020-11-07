@@ -13,7 +13,7 @@ import illustration from '../static/images/illustration.png';
 import anime from '../static/images/anime.jpg';
 import oil from '../static/images/oil.jpeg';
 
-const MenuContainer = styled.main`
+const MenuContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
