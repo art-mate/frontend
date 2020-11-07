@@ -49,6 +49,18 @@ const PaintUpload = ({ userObj }) => {
     }
   };
 
+  const onFileChange = (event) => {
+    const {
+      target: { files },
+    } = event;
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      console.log(finishedEvent);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <PaintUploadModal>
       <form onSubmit={onSubmit}>
@@ -83,6 +95,7 @@ const PaintUpload = ({ userObj }) => {
           type="text"
           placeholder="희망가격"
         />
+        <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="등록" />
       </form>
       <Link to="/">
