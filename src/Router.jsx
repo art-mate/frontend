@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import PaintUpload from './components/PaintUpload';
 import Auth from './routes/Auth';
 import Home from './routes/Home';
 import Menu from './routes/Menu';
@@ -13,7 +14,7 @@ export default function Router({ isLoggedIn, userObj }) {
           <Route
             path="/"
             exact
-            render={() => <Home isLoggedIn={isLoggedIn} />}
+            render={() => <Home userObj={userObj} />}
           ></Route>
           <Route
             path="/menu"
@@ -25,6 +26,11 @@ export default function Router({ isLoggedIn, userObj }) {
             path="/profile"
             exact
             render={() => <Profile userObj={userObj} />}
+          ></Route>
+          <Route
+            path="/upload"
+            exact
+            render={() => <PaintUpload userObj={userObj} />}
           ></Route>
         </Switch>
       </BrowserRouter>

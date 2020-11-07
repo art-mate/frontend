@@ -79,7 +79,7 @@ const ProfileWrap = styled.div`
   }
 `;
 
-export default function Navigation({ isLoggedIn }) {
+export default function Navigation({ userObj }) {
   const { theme } = useContext(ThemeContext);
   return (
     <NavContainer navBar={theme.navBar}>
@@ -89,7 +89,7 @@ export default function Navigation({ isLoggedIn }) {
         </TitleContainer>
         <DarkModeToggle />
         <InfoContainer>
-          {isLoggedIn ? (
+          {userObj ? (
             <>
               <Link to="/profile">
                 <ProfileWrap text={theme.text}>

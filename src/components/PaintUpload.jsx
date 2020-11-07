@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { dbService } from '../fBase';
 
-const PaintUpload = () => {
+const PaintUploadModal = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PaintUpload = ({ userObj }) => {
   const [paint, setPaint] = useState('');
 
   const onSubmit = async (event) => {
@@ -12,6 +21,7 @@ const PaintUpload = () => {
       .add({
         paint,
         createdAt: Date.now(),
+        creatorId: userObj.uid,
       })
       .then(() => alert('완료'))
       .catch((error) => alert(error.message));
@@ -26,7 +36,7 @@ const PaintUpload = () => {
   };
 
   return (
-    <div>
+    <PaintUploadModal>
       <form onSubmit={onSubmit}>
         <input
           value={paint}
@@ -37,7 +47,10 @@ const PaintUpload = () => {
         />
         <input type="submit" value="등록" />
       </form>
-    </div>
+      <Link to="/">
+        <button>Cancel</button>
+      </Link>
+    </PaintUploadModal>
   );
 };
 

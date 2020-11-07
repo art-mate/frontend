@@ -2,15 +2,15 @@ import React from 'react';
 import Main from '../components/Main';
 import Navigation from '../components/Navigation';
 import Menu from './Menu';
-import PaintUpload from '../components/PaintUpload';
+import UploadToggle from '../components/UploadToggle';
 
-export default function Home({ isLoggedIn }) {
+export default function Home({ userObj }) {
   return (
     <React.Fragment>
-      <Navigation isLoggedIn={isLoggedIn} />
+      <Navigation userObj={userObj} />
       <Main />
       <Menu />
-      <PaintUpload />
+      <UploadToggle userObj={userObj} />
     </React.Fragment>
   );
 }
