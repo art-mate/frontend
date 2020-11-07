@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../App';
 import styled from 'styled-components';
-import Navigation from '../components/Navigation';
+import Navigation from './Navigation';
 import { dbService } from '../fBase';
 
 const MenuContainer = styled.div`
@@ -116,8 +116,11 @@ export default function Menu({ userObj }) {
         <MenuGrid>
           <div>
             {posts.map((post) => (
-              <div>
-                <h4>{post.paint}</h4>
+              <div key={post.id}>
+                <h4>{post.paintName}</h4>
+                <h4>{post.artist}</h4>
+                <h4>{post.description}</h4>
+                <h4>{post.price}</h4>
               </div>
             ))}
           </div>
