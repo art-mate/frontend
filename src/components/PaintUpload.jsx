@@ -83,14 +83,16 @@ const FileUploadContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  width: 100%;
-  width: 100%;
+  width: 420px;
   height: 80px;
-  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+
+  & a {
+    width: 100%;
+  }
 `;
 
 const ContentWrap = styled.div`
@@ -155,7 +157,7 @@ const UploadCancelButton = styled.button`
 `;
 
 const CancelButton = styled.button`
-  width: 180px;
+  width: 100%;
   height: 50px;
   border-radius: 8px;
   border: none;
@@ -167,7 +169,7 @@ const CancelButton = styled.button`
 `;
 
 const SubmitButton = styled.input`
-  width: 180px;
+  width: 100%;
   height: 50px;
   border-radius: 8px;
   border: none;
@@ -190,6 +192,7 @@ const PaintUpload = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    console.log(11);
     let attachmentUrl = '';
     if (attachment !== '') {
       const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
@@ -320,9 +323,9 @@ const PaintUpload = ({ userObj }) => {
               maxLength={120}
             />
           </DescriptionWrap>
+          <SubmitButton type="submit" value="등록" />
         </UploadForm>
         <ButtonContainer>
-          <SubmitButton type="submit" value="등록" />
           <Link to="/">
             <CancelButton>Cancel</CancelButton>
           </Link>
