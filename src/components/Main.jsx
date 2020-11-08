@@ -5,23 +5,23 @@ import MainImage from '../static/images/mainImage.png';
 
 const MainContainer = styled.main`
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 const IntroSection = styled.section`
-  width: 95%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0a0a0d;
+  padding-top: 60px;
+  background: linear-gradient(45deg, #4e06da, #f15e5e);
 `;
 
 const ContentContainer = styled.section`
-  width: 50%;
+  width: 45%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -42,12 +42,11 @@ const MainContent = styled.div`
 `;
 
 const ImageSection = styled.figure`
-  width: 50%;
+  width: 65%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  filter: brightness(0.5);
   position: relative;
 `;
 
@@ -57,14 +56,12 @@ const DetailButton = styled.button`
   border-radius: 30px;
   font-size: 14px;
   margin-top: 15px;
-  color: ${(props) =>
-    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+  color: #fafafa;
   background: none;
+  border: 1px solid #fafafa;
   &:hover {
-    background: ${(props) =>
-      props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
-    color: ${(props) =>
-      props.themeProps.body === '#fcfcfc' ? '#fafafa' : '#363537'};
+    background: #fafafa;
+    color: #363537;
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -82,7 +79,7 @@ export default function Main() {
 
   return (
     <MainContainer>
-      <IntroSection>
+      <IntroSection image={MainImage}>
         <ContentContainer>
           <MainContent>
             <SubHead>모든 예술가를 위한 플랫폼</SubHead>
@@ -92,10 +89,20 @@ export default function Main() {
           </MainContent>
           <DetailButton themeProps={theme}>더 알아보기</DetailButton>
         </ContentContainer>
-        <ImageSection>
+        {/* <ImageSection>
           <img src={MainImage} alt="main" />
-          {/* <figcaption style={{position:'absolute', left:'50%', bottom:'10px', color: 'white', fontSize:'10px'}}>진주 귀걸이를 한 소녀</figcaption> */}
-        </ImageSection>
+          <figcaption
+            style={{
+              position: 'absolute',
+              left: '50%',
+              bottom: '10px',
+              color: 'white',
+              fontSize: '10px',
+            }}
+          >
+            진주 귀걸이를 한 소녀
+          </figcaption>
+        </ImageSection> */}
       </IntroSection>
     </MainContainer>
   );

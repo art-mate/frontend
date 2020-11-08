@@ -2,7 +2,6 @@ import React from 'react';
 import Main from '../components/Main';
 import Navigation from '../components/Navigation';
 import Menu from '../components/Menu';
-import UploadToggle from '../components/UploadToggle';
 
 export default function Home({ userObj }) {
   return (
@@ -10,7 +9,6 @@ export default function Home({ userObj }) {
       <Navigation userObj={userObj} />
       <Main />
       <Menu />
-      <UploadToggle userObj={userObj} />
     </React.Fragment>
   );
 }

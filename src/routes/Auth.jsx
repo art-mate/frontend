@@ -14,7 +14,7 @@ const AuthContainer = styled.div`
 `;
 
 const InputContainer = styled.div`
-  width: 60%;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,8 +37,9 @@ const LoginContainer = styled.div`
 `;
 
 const LoginFormWrap = styled.div`
-  width: 58%;
-  height: 450px;
+  width: 38%;
+  min-width: 530px;
+  height: 570px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
@@ -178,7 +179,7 @@ const SignInContentWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 `;
 
 const Auth = () => {
@@ -264,13 +265,13 @@ const Auth = () => {
             </button>
           </CheckNewUserWrap>
         </CheckNewUserContainer>
-        <SideContainer>
+        {/* <SideContainer>
           <SideContent>
             <span role="img" aria-labelledby="art">
               🎨
             </span>
           </SideContent>
-        </SideContainer>
+        </SideContainer> */}
         <InputContainer>
           <LoginFormWrap>
             <LoginForm onSubmit={onSubmit}>

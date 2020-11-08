@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../App';
 import styled from 'styled-components';
-import Navigation from './Navigation';
 import { dbService } from '../fBase';
 
 const MenuContainer = styled.div`
@@ -12,21 +11,30 @@ const MenuContainer = styled.div`
   align-items: center;
 `;
 
-const MenuIntroduction = styled.div`
-  width: 100%;
-  height: 250px;
-  margin-top: 60px;
+const MenuSelector = styled.div`
+  width: 85%;
+  height: 150px;
+  margin-top: 80px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
 
-  span {
+  div {
+    width: 50%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 15px;
+    align-items: center;
+    margin-bottom: 20px;
   }
+`;
+
+const UploadContainer = styled.div`
+  width: 85%;
+  height: 100px;
+  background: aliceblue;
 `;
 
 const SubHead = styled.h3`
@@ -50,7 +58,7 @@ const MenuGrid = styled.div`
   }
 `;
 
-const PhotoContainer = styled.figure`
+const PostContainer = styled.div`
   width: 23vw;
   height: 23vw;
   min-width: 170px;
@@ -108,11 +116,14 @@ export default function Menu({ userObj }) {
 
   return (
     <>
-      <Navigation userObj={userObj} />
       <MenuContainer>
-        <MenuIntroduction>
-          <div>Collections Goods</div>
-        </MenuIntroduction>
+        <MenuSelector>
+          <div>Collections</div>
+          <div>Goods</div>
+        </MenuSelector>
+        <UploadContainer>
+          <div>작품 등록하기</div>
+        </UploadContainer>
         <MenuGrid>
           <div>
             {posts.map((post) => (

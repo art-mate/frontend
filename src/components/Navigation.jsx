@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import DarkModeToggle from './DarkModeToggle';
 import { ThemeContext } from '../App';
@@ -74,6 +74,7 @@ const ProfileWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   & svg {
     color: ${(props) => props.text};
@@ -81,7 +82,12 @@ const ProfileWrap = styled.div`
 `;
 
 export default function Navigation({ userObj }) {
+  const [sideMenuToggle, setSideMenuToggle] = useState(false);
   const { theme } = useContext(ThemeContext);
+
+  const onSideMenuClick = () => {
+    setSideMenuToggle((prev) => !prev);
+  };
   return (
     <NavContainer navBar={theme.navBar}>
       <NavContentContainer>
@@ -97,7 +103,7 @@ export default function Navigation({ userObj }) {
                   <FaUserCircle size={25} />
                 </ProfileWrap>
               </Link>
-              <ProfileWrap text={theme.text}>
+              <ProfileWrap text={theme.text} onClick={onSideMenuClick}>
                 <AiOutlineEllipsis size={33} />
               </ProfileWrap>
             </>
@@ -109,7 +115,11 @@ export default function Navigation({ userObj }) {
         </InfoContainer>
         <ScrollToTop />
       </NavContentContainer>
-      {/* <SideMenu /> */}
+      <SideMenu
+        userObj={userObj}
+        sideMenuToggle={sideMenuToggle}
+        onSideMenuClick={onSideMenuClick}
+      />
     </NavContainer>
   );
 }

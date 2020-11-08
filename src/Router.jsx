@@ -28,7 +28,7 @@ export default function Router({ isLoggedIn, userObj }) {
             render={() => <Profile userObj={userObj} />}
           ></Route>
           <Route
-            path="/upload"
+            path="/uploadp"
             exact
             render={() => <PaintUpload userObj={userObj} />}
           ></Route>

@@ -5,7 +5,10 @@ import { dbService, storageService } from '../fBase';
 import { v4 as uuidv4 } from 'uuid';
 
 const PaintUploadModal = styled.div`
-  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
