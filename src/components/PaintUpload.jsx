@@ -1,18 +1,181 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import { ThemeContext } from '../App';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { dbService, storageService } from '../fBase';
 import { v4 as uuidv4 } from 'uuid';
+import { BiUpload } from 'react-icons/bi';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-const PaintUploadModal = styled.div`
+const UploadContainer = styled.div`
   position: absolute;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const UploadFormWrap = styled.div`
+  width: 40%;
+  min-width: 530px;
+  height: 650px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.4);
+  background: ${(props) => props.themeProps.navBar};
+`;
+
+const UploadForm = styled.form`
+  max-width: 550px;
+  min-width: 420px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InputWrap = styled.div`
+  width: 100%;
+  height: 80px;
+  & input {
+    padding: 15px;
+    width: 100%;
+    margin-top: 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  & label {
+    font-size: 0.8rem;
+  }
+`;
+
+const DescriptionWrap = styled.div`
+  width: 100%;
+  & textarea {
+    padding: 15px;
+    width: 100%;
+    height: 100px;
+    margin-top: 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  & label {
+    font-size: 0.8rem;
+  }
+`;
+
+const FileUploadContainer = styled.div`
+  width: 40%;
+  height: 650px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  width: 100%;
+  height: 80px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const ContentWrap = styled.div`
+  width: 100%;
+  height: 40px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const Preview = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+`;
+
+const FileUploadWrap = styled.div`
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: #fcfcfc;
+  cursor: pointer;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
+
+  & svg {
+    color: #686869;
+  }
+
+  &:hover {
+    background: #e0e0e0;
+  }
+`;
+
+const ContentsWrap = styled.div`
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CaptionWrap = styled.div`
+  width: 80%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const UploadCancelButton = styled.button`
+  background: none;
+  border: none;
+  & svg {
+    color: black;
+  }
+`;
+
+const CancelButton = styled.button`
+  width: 180px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  background: #ff3c3c;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 30px;
+`;
+
+const SubmitButton = styled.input`
+  width: 180px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  background: #e6328d;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 30px;
 `;
 
 const PaintUpload = ({ userObj }) => {
@@ -21,6 +184,9 @@ const PaintUpload = ({ userObj }) => {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [attachment, setAttachment] = useState();
+
+  const { theme } = useContext(ThemeContext);
+  const hiddenFileInput = useRef(null);
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -31,7 +197,7 @@ const PaintUpload = ({ userObj }) => {
       attachmentUrl = await response.ref.getDownloadURL();
     }
     const paintObj = {
-      paintName: paint,
+      name: paint,
       artist: artist,
       price: price,
       description: description,
@@ -42,7 +208,7 @@ const PaintUpload = ({ userObj }) => {
     await dbService
       .collection('paints')
       .add(paintObj)
-      .then(() => alert('완료'))
+      .then(() => alert('등록 완료'))
       .catch((error) => alert(error.message));
     setPaint('');
     setAttachment('');
@@ -82,53 +248,87 @@ const PaintUpload = ({ userObj }) => {
     setAttachment(null);
   };
 
+  const handleFileClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
   return (
-    <PaintUploadModal>
-      <form onSubmit={onSubmit}>
+    <UploadContainer>
+      <FileUploadContainer>
+        <ContentsWrap>
+          {attachment ? (
+            <Preview>
+              <img src={attachment} alt="attachment" />
+            </Preview>
+          ) : (
+            <FileUploadWrap onClick={handleFileClick}>
+              <BiUpload size={70} />
+            </FileUploadWrap>
+          )}
+        </ContentsWrap>
+        <CaptionWrap>
+          {attachment ? (
+            <UploadCancelButton onClick={onClearAttachment}>
+              <AiOutlineCloseCircle size={30} />
+            </UploadCancelButton>
+          ) : (
+            <p>여기서 사진을 업로드하고 미리보기로 보실 수 있습니다.</p>
+          )}
+        </CaptionWrap>
         <input
-          name="artist"
-          value={artist}
-          onChange={onChange}
-          type="text"
-          placeholder="아티스트명"
-          maxLength={10}
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+          ref={hiddenFileInput}
+          style={{ display: 'none' }}
         />
-        <input
-          name="paint"
-          value={paint}
-          onChange={onChange}
-          type="text"
-          placeholder="작품명"
-          maxLength={50}
-        />
-        <input
-          name="description"
-          value={description}
-          onChange={onChange}
-          type="text"
-          placeholder="작품설명"
-          maxLength={120}
-        />
-        <input
-          name="price"
-          value={price}
-          onChange={onChange}
-          type="text"
-          placeholder="희망가격"
-        />
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" value="등록" />
-        {attachment && (
-          <div>
-            <img src={attachment} alt="attachment" width="50px" height="50px" />
-            <button onClick={onClearAttachment}>업로드 취소</button>
-          </div>
-        )}
-      </form>
-      <Link to="/">
-        <button>Cancel</button>
-      </Link>
-    </PaintUploadModal>
+      </FileUploadContainer>
+      <UploadFormWrap themeProps={theme}>
+        <ContentWrap>작품 등록</ContentWrap>
+        <UploadForm onSubmit={onSubmit}>
+          <InputWrap>
+            <label htmlFor="artist">아티스트명</label>
+            <input
+              name="artist"
+              value={artist}
+              onChange={onChange}
+              type="text"
+              maxLength={10}
+            />
+          </InputWrap>
+          <InputWrap>
+            <label htmlFor="작품명">작품명</label>
+            <input
+              name="paint"
+              value={paint}
+              onChange={onChange}
+              type="text"
+              maxLength={50}
+            />
+          </InputWrap>
+          <InputWrap>
+            <label htmlFor="price">희망가격</label>
+            <input name="price" value={price} onChange={onChange} type="text" />
+          </InputWrap>
+          <DescriptionWrap>
+            <label htmlFor="description">작품설명</label>
+            <textarea
+              name="description"
+              value={description}
+              onChange={onChange}
+              type="text"
+              maxLength={120}
+            />
+          </DescriptionWrap>
+        </UploadForm>
+        <ButtonContainer>
+          <SubmitButton type="submit" value="등록" />
+          <Link to="/">
+            <CancelButton>Cancel</CancelButton>
+          </Link>
+        </ButtonContainer>
+      </UploadFormWrap>
+    </UploadContainer>
   );
 };
 

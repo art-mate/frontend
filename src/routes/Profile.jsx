@@ -20,7 +20,8 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #d0d0d0;
+  padding: 20px;
 `;
 
 const InfoWrap = styled.div`
@@ -39,6 +40,7 @@ const MenuContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  padding: 10px;
   & button {
     background: none;
     border: none;
@@ -48,12 +50,21 @@ const MenuContainer = styled.div`
 
 const MyPaintContainer = styled.div`
   width: 50%;
-  height: 160px;
+  height: 200px;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-bottom: 1px solid #d0d0d0;
   font-size: 1.5rem;
+  padding: 10px;
+
+  & div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+  }
   & button {
     background: none;
     border: none;
@@ -102,10 +113,28 @@ const Profile = ({ userObj }) => {
           </InfoWrap>
         </InfoContainer>
         <MyPaintContainer>
-          <span role="img" aria-labelledby="art">
-            🎨
-          </span>
-          <button> 내 작품 보러가기</button>
+          <div>
+            <span role="img" aria-labelledby="paint">
+              🖼
+            </span>
+            <Link to="/uploadp">
+              <button> 작품 등록하기</button>
+            </Link>
+          </div>
+          <div>
+            <span role="img" aria-labelledby="goods">
+              🎎
+            </span>
+            <Link to="/uploadg">
+              <button> 굿즈 등록하기</button>
+            </Link>
+          </div>
+          <div>
+            <span role="img" aria-labelledby="art">
+              🎨
+            </span>
+            <button> 내 작품 보러가기</button>
+          </div>
         </MyPaintContainer>
         <MenuContainer>
           <MenuWrap>

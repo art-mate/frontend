@@ -73,7 +73,7 @@ const Post = ({ userObj }) => {
         )}
       </PostPhotoWrap>
       <PostDescription themeProps={theme}>
-        <PostTitle>{userObj.paintName}</PostTitle>
+        <PostTitle>{userObj.name}</PostTitle>
         <PostDetail>
           <span>{userObj.artist}</span>
           <span>{userObj.description}</span>

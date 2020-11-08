@@ -53,16 +53,12 @@ const SideMenuList = styled.ul`
 const SideMenu = ({ userObj, sideMenuToggle, onSideMenuClick }) => {
   const { theme } = useContext(ThemeContext);
 
-  const handleClick = () => {
-    alert('로그인이 필요한 서비스입니다 🙅');
-  };
-
   return (
     <SideContainer sideMenuToggle={sideMenuToggle}>
       <SideToggle sideMenuToggle={sideMenuToggle} onClick={onSideMenuClick} />
       <SideWrap themeProps={theme} sideMenuToggle={sideMenuToggle}>
         <SideNavContainer>
-          <SideMenuList>
+          {/* <SideMenuList>
             {userObj ? (
               <>
                 <Link to="/uploadp">
@@ -78,7 +74,7 @@ const SideMenu = ({ userObj, sideMenuToggle, onSideMenuClick }) => {
                 <li onClick={handleClick}>굿즈 업로드</li>
               </>
             )}
-          </SideMenuList>
+          </SideMenuList> */}
         </SideNavContainer>
       </SideWrap>
     </SideContainer>

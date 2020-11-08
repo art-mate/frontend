@@ -3,6 +3,7 @@ import { ThemeContext } from '../App';
 import styled from 'styled-components';
 import { dbService } from '../fBase';
 import Post from './Post';
+import { Link } from 'react-router-dom';
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -13,8 +14,8 @@ const MenuContainer = styled.div`
 `;
 
 const MenuSelector = styled.div`
-  width: 60%;
-  height: 75px;
+  width: 50%;
+  height: 70px;
   margin-top: 30px;
   display: flex;
   flex-direction: row;
@@ -95,10 +96,22 @@ const UploadMenu = styled.div`
     props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
 `;
 
+const SelectModal = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 60%;
+  height: 80%;
+  background: white;
+  transform: translateX(-50%) translateY(-50%);
+`;
+
 export default function Menu({ userObj }) {
   const { theme } = useContext(ThemeContext);
-  const [posts, setPosts] = useState([]);
+  const [collections, setCollections] = useState([]);
+  const [goods, setGoods] = useState([]);
   const [select, setSelect] = useState('collection');
+  const [selectModal, setSelectModal] = useState(false);
 
   useEffect(() => {
     dbService.collection('paints').onSnapshot((snapshot) => {
@@ -106,7 +119,14 @@ export default function Menu({ userObj }) {
         id: doc.id,
         ...doc.data(),
       }));
-      setPosts(postArray);
+      setCollections(postArray);
+    });
+    dbService.collection('goods').onSnapshot((snapshot) => {
+      const postArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setGoods(postArray);
     });
   }, []);
 
@@ -120,6 +140,14 @@ export default function Menu({ userObj }) {
 
   const onGoodsClick = () => {
     setSelect('goods');
+  };
+
+  const handleClick = () => {
+    alert('로그인이 필요한 서비스입니다 🙅');
+  };
+
+  const uploadSelect = () => {
+    setSelectModal((prev) => !prev);
   };
 
   return (
@@ -136,16 +164,20 @@ export default function Menu({ userObj }) {
           <GoodsMenu select={select} themeProps={theme} onClick={onGoodsClick}>
             <span>Goods</span>
           </GoodsMenu>
-          <UploadMenu themeProps={theme}>작품 등록하기</UploadMenu>
         </MenuSelector>
-        {/*<UploadContainer>
-           
-        </UploadContainer> */}
-        <MenuGrid>
-          {posts.map((post) => (
-            <Post key={post.id} userObj={post}></Post>
-          ))}
-        </MenuGrid>
+        {select === 'collection' ? (
+          <MenuGrid>
+            {collections.map((collection) => (
+              <Post key={collection.id} userObj={collection}></Post>
+            ))}
+          </MenuGrid>
+        ) : (
+          <MenuGrid>
+            {goods.map((good) => (
+              <Post key={good.id} userObj={good}></Post>
+            ))}
+          </MenuGrid>
+        )}
       </MenuContainer>
     </>
   );

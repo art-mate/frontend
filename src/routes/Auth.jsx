@@ -116,15 +116,6 @@ const GoogleLoginWrap = styled.div`
   }
 `;
 
-const SideContent = styled.div`
-  width: 100%;
-  font-size: 6rem;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const ErrorMsgWrap = styled.div`
   width: 100%;
   height: 40px;
