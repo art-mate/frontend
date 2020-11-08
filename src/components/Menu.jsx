@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../App';
 import styled from 'styled-components';
 import { dbService } from '../fBase';
+import Post from './Post';
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -12,93 +13,92 @@ const MenuContainer = styled.div`
 `;
 
 const MenuSelector = styled.div`
-  width: 85%;
-  height: 150px;
-  margin-top: 80px;
+  width: 60%;
+  height: 75px;
+  margin-top: 30px;
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
+  background: ${(props) => props.themeProps.navBar};
+`;
+
+const CollectionMenu = styled.div`
+  width: 30%;
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 17px;
+  color: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
 
-  div {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+  & span {
+    cursor: pointer;
+  }
+`;
+
+const GoodsMenu = styled.div`
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  color: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+  & span {
+    cursor: pointer;
   }
 `;
 
 const UploadContainer = styled.div`
   width: 85%;
   height: 100px;
-  background: aliceblue;
-`;
-
-const SubHead = styled.h3`
-  font-size: 2.2rem;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-  font-weight: 900;
-`;
-
-const MenuGrid = styled.div`
-  display: grid;
-  margin-bottom: 80px;
-  grid-column-gap: 2vw;
-  grid-row-gap: 4vw;
-  grid-template-columns: repeat(3, 1fr);
-
-  @media screen and (max-width: 430px) {
-    grid-template-columns: repeat(1, 1fr);
-    grid-row-gap: 4vw;
-  }
-`;
-
-const PostContainer = styled.div`
-  width: 23vw;
-  height: 23vw;
-  min-width: 170px;
-  min-height: 170px;
-  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
-  position: relative;
-
-  & img {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-  &:hover {
-    transition: all 0.5s ease;
-    transform: scale(1.02);
-  }
-  @media screen and (max-width: 430px) {
-    min-width: 300px;
-    min-height: 300px;
-  }
-`;
-
-const PaintKind = styled.figcaption`
-  width: 50%;
-  height: 50px;
-  background: ${(props) => props.themeProps.navBar};
-  position: absolute;
-  left: 50%;
-  bottom: -7%;
-  transform: translateX(-50%);
-  border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+`;
+
+const MenuGrid = styled.div`
+  width: 80%;
+  display: grid;
+  margin-bottom: 60px;
+  margin-top: 30px;
+  grid-column-gap: 10px;
+  grid-row-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media screen and (max-width: 430px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
+const UploadMenu = styled.div`
+  width: 30%;
+  height: 100%;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
 `;
 
 export default function Menu({ userObj }) {
   const { theme } = useContext(ThemeContext);
   const [posts, setPosts] = useState([]);
+  const [select, setSelect] = useState('collection');
 
   useEffect(() => {
     dbService.collection('paints').onSnapshot((snapshot) => {
@@ -114,35 +114,37 @@ export default function Menu({ userObj }) {
     window.scrollTo(0, 0);
   }, []);
 
+  const onCollectionClick = () => {
+    setSelect('collection');
+  };
+
+  const onGoodsClick = () => {
+    setSelect('goods');
+  };
+
   return (
     <>
       <MenuContainer>
-        <MenuSelector>
-          <div>Collections</div>
-          <div>Goods</div>
+        <MenuSelector themeProps={theme}>
+          <CollectionMenu
+            select={select}
+            themeProps={theme}
+            onClick={onCollectionClick}
+          >
+            <span>Collection</span>
+          </CollectionMenu>
+          <GoodsMenu select={select} themeProps={theme} onClick={onGoodsClick}>
+            <span>Goods</span>
+          </GoodsMenu>
+          <UploadMenu themeProps={theme}>작품 등록하기</UploadMenu>
         </MenuSelector>
-        <UploadContainer>
-          <div>작품 등록하기</div>
-        </UploadContainer>
+        {/*<UploadContainer>
+           
+        </UploadContainer> */}
         <MenuGrid>
-          <div>
-            {posts.map((post) => (
-              <div key={post.id}>
-                <h4>{post.paintName}</h4>
-                <h4>{post.artist}</h4>
-                <h4>{post.description}</h4>
-                <h4>{post.price}</h4>
-                {post.attachmentUrl && (
-                  <img
-                    src={post.attachmentUrl}
-                    alt="attachment"
-                    width="50px"
-                    height="50px"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+          {posts.map((post) => (
+            <Post key={post.id} userObj={post}></Post>
+          ))}
         </MenuGrid>
       </MenuContainer>
     </>

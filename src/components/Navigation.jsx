@@ -46,7 +46,6 @@ const TitleContainer = styled.header`
 `;
 
 const InfoContainer = styled.div`
-  width: 250px;
   height: 100%;
   display: flex;
   justify-content: center;
