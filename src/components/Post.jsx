@@ -56,6 +56,7 @@ const PostDetail = styled.p`
   justify-content: center;
   align-items: flex-start;
   font-size: 14px;
+  line-height: 1.3;
 `;
 
 const Post = ({ userObj }) => {
@@ -77,7 +78,7 @@ const Post = ({ userObj }) => {
         <PostDetail>
           <span>{userObj.artist}</span>
           <span>{userObj.description}</span>
-          <span>{userObj.price}</span>
+          <span>{userObj.price}원</span>
         </PostDetail>
       </PostDescription>
     </PostContainer>

@@ -83,9 +83,9 @@ export default function Main() {
         <ContentContainer>
           <MainContent>
             <SubHead>모든 예술가를 위한 플랫폼</SubHead>
-            <span>당신의 작품과 새로운 영감을 위해</span>
-            <span>보관하고 싶은 작품을 영구적으로 마음껏</span>
             <span>보고싶은 작품을 간편하게</span>
+            <span>작품을 자유롭게 거래</span>
+            <span>당신만의 아이디어를 굿즈로 만들어보세요</span>
           </MainContent>
           <DetailButton themeProps={theme}>더 알아보기</DetailButton>
         </ContentContainer>
