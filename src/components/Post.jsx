@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 
@@ -60,7 +60,18 @@ const PostDetail = styled.p`
 `;
 
 const Post = ({ userObj }) => {
+  const [description, setDescription] = useState('');
   const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (userObj.description.length >= 30) {
+      //console.log(userObj.description.substr(0, 30));
+      setDescription(userObj.description.substr(0, 30).concat('...'));
+    } else {
+      setDescription(userObj.description);
+    }
+  }, []);
+
   return (
     <PostContainer>
       <PostPhotoWrap>
@@ -77,7 +88,7 @@ const Post = ({ userObj }) => {
         <PostTitle>{userObj.name}</PostTitle>
         <PostDetail>
           <span>{userObj.artist}</span>
-          <span>{userObj.description}</span>
+          <span>{description}</span>
           <span>{userObj.price}원</span>
         </PostDetail>
       </PostDescription>
