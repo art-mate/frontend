@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 
@@ -59,7 +60,7 @@ const PostDetail = styled.p`
   color: #8c8c8c;
 `;
 
-const Post = ({ userObj }) => {
+const Post = ({ userObj, select }) => {
   const [description, setDescription] = useState('');
   const { theme } = useContext(ThemeContext);
 
@@ -75,12 +76,22 @@ const Post = ({ userObj }) => {
     <PostContainer>
       <PostPhotoWrap>
         {userObj.attachmentUrl && (
-          <img
-            src={userObj.attachmentUrl}
-            alt="attachment"
-            width="50px"
-            height="50px"
-          />
+          <Link
+            to={{
+              pathname:
+                select === 'collections'
+                  ? `/paint/${userObj.id}`
+                  : `/goods/${userObj.id}`,
+              state: userObj,
+            }}
+          >
+            <img
+              src={userObj.attachmentUrl}
+              alt="attachment"
+              width="50px"
+              height="50px"
+            />
+          </Link>
         )}
       </PostPhotoWrap>
       <PostDescription themeProps={theme}>

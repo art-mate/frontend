@@ -136,14 +136,18 @@ export default function Menu({ userObj }) {
         {select === 'collection' ? (
           <MenuGrid>
             {collections.map((collection) => (
-              <Post key={collection.id} userObj={collection}></Post>
+              <Post
+                key={collection.id}
+                userObj={collection}
+                select={select}
+              ></Post>
             ))}
           </MenuGrid>
         ) : (
           <MenuGrid>
             <>
               {goods.map((good) => (
-                <Post key={good.id} userObj={good}></Post>
+                <Post key={good.id} userObj={good} select={select}></Post>
               ))}
             </>
           </MenuGrid>

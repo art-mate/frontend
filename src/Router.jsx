@@ -6,8 +6,9 @@ import Home from './routes/Home';
 import Menu from './components/Menu';
 import Profile from './routes/Profile';
 import GoodsUpload from './components/GoodsUpload';
+import Detail from './routes/Detail';
 
-export default function Router({ isLoggedIn, userObj }) {
+export default function Router({ userObj }) {
   return (
     <>
       <BrowserRouter>
@@ -33,6 +34,8 @@ export default function Router({ isLoggedIn, userObj }) {
             exact
             render={() => <GoodsUpload userObj={userObj} />}
           ></Route>
+          <Route path="/paint/:id" component={Detail} />
+          <Route path="/goods/:id" component={Detail} />
         </Switch>
       </BrowserRouter>
     </>

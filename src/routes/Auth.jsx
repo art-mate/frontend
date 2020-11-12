@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { authService, firebaseInstance } from '../fBase';
 import { useHistory } from 'react-router-dom';
 import googleLogo from '../static/images/googleLogo.svg';
+import { ThemeContext } from '../App';
 
 const AuthContainer = styled.div`
   width: 100%;
@@ -38,6 +39,7 @@ const LoginFormWrap = styled.div`
   justify-content: center;
   align-items: center;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  background: ${(props) => props.theme.navBar};
 `;
 
 const LoginForm = styled.form`
@@ -143,6 +145,7 @@ const Auth = () => {
   const [error, setError] = useState('');
   const [newAccount, setNewAccount] = useState(false);
   const [checkUser, setCheckUser] = useState(false);
+  const { theme } = useContext(ThemeContext);
   const history = useHistory();
 
   const onSubmit = async (event) => {
@@ -207,7 +210,7 @@ const Auth = () => {
     <>
       <AuthContainer>
         <InputContainer>
-          <LoginFormWrap>
+          <LoginFormWrap theme={theme}>
             <LoginForm onSubmit={onSubmit}>
               {newAccount ? (
                 <SignInContentWrap>회원가입</SignInContentWrap>
