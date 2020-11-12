@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 
@@ -58,23 +57,7 @@ const SideMenu = ({ userObj, sideMenuToggle, onSideMenuClick }) => {
       <SideToggle sideMenuToggle={sideMenuToggle} onClick={onSideMenuClick} />
       <SideWrap themeProps={theme} sideMenuToggle={sideMenuToggle}>
         <SideNavContainer>
-          {/* <SideMenuList>
-            {userObj ? (
-              <>
-                <Link to="/uploadp">
-                  <li>작품 업로드</li>
-                </Link>
-                <Link to="/uploadg">
-                  <li>굿즈 업로드</li>
-                </Link>
-              </>
-            ) : (
-              <>
-                <li onClick={handleClick}>작품 업로드</li>
-                <li onClick={handleClick}>굿즈 업로드</li>
-              </>
-            )}
-          </SideMenuList> */}
+          <SideMenuList></SideMenuList>
         </SideNavContainer>
       </SideWrap>
     </SideContainer>

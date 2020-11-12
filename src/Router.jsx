@@ -3,7 +3,6 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import PaintUpload from './components/PaintUpload';
 import Auth from './routes/Auth';
 import Home from './routes/Home';
-import Menu from './components/Menu';
 import Profile from './routes/Profile';
 import GoodsUpload from './components/GoodsUpload';
 import Detail from './routes/Detail';

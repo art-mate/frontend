@@ -70,7 +70,7 @@ const Post = ({ userObj, select }) => {
     } else {
       setDescription(userObj.description);
     }
-  }, []);
+  }, [userObj.description]);
 
   return (
     <PostContainer>

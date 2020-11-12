@@ -8,7 +8,7 @@ export default function Home({ userObj }) {
     <React.Fragment>
       <Navigation userObj={userObj} />
       <Main />
-      <Menu userObj={userObj} />
+      <Menu />
     </React.Fragment>
   );
 }

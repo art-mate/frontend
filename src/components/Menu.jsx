@@ -3,7 +3,6 @@ import { ThemeContext } from '../App';
 import styled from 'styled-components';
 import { dbService } from '../fBase';
 import Post from './Post';
-import { Link } from 'react-router-dom';
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -87,7 +86,6 @@ export default function Menu({ userObj }) {
   const [collections, setCollections] = useState([]);
   const [goods, setGoods] = useState([]);
   const [select, setSelect] = useState('collection');
-  const [selectModal, setSelectModal] = useState(false);
 
   useEffect(() => {
     dbService.collection('paints').onSnapshot((snapshot) => {

@@ -144,23 +144,18 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [newAccount, setNewAccount] = useState(false);
-  const [checkUser, setCheckUser] = useState(false);
   const { theme } = useContext(ThemeContext);
   const history = useHistory();
 
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      let data;
       if (newAccount) {
         // create account
-        data = await authService.createUserWithEmailAndPassword(
-          email,
-          password,
-        );
+        await authService.createUserWithEmailAndPassword(email, password);
       } else {
         // login
-        data = await authService.signInWithEmailAndPassword(email, password);
+        await authService.signInWithEmailAndPassword(email, password);
       }
       history.push('/');
     } catch (error) {
@@ -198,12 +193,10 @@ const Auth = () => {
 
   const onLoginClick = () => {
     setNewAccount(false);
-    setCheckUser((prev) => !prev);
   };
 
   const onRegisterClick = () => {
     setNewAccount(true);
-    setCheckUser((prev) => !prev);
   };
 
   return (
@@ -267,9 +260,11 @@ const Auth = () => {
             <CheckNewUserWrap>
               {newAccount ? (
                 <>
+                  이미 가입하셨나요?{' '}
                   <span
                     onClick={onLoginClick}
                     style={{
+                      marginLeft: '10px',
                       fontSize: '15px',
                       fontWeight: 'bold',
                       cursor: 'pointer',
