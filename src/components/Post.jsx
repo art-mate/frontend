@@ -68,17 +68,8 @@ const Content = styled.span`
 `;
 
 const Post = ({ userObj, artData, select }) => {
-  const [description, setDescription] = useState('');
   const { theme } = useContext(ThemeContext);
   const isUser = Boolean(userObj);
-
-  useEffect(() => {
-    if (artData.description.length >= 30) {
-      setDescription(artData.description.substr(0, 30).concat('...'));
-    } else {
-      setDescription(artData.description);
-    }
-  }, [artData.description]);
 
   return (
     <PostContainer>

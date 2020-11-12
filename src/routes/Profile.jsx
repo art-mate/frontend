@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-import { authService } from '../fBase';
+import { authService, dbService } from '../fBase';
 import { Link } from 'react-router-dom';
 
 const ProfileContainer = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,6 +21,7 @@ const InfoContainer = styled.div`
   justify-content: center;
   border-bottom: 1px solid #d0d0d0;
   padding: 20px;
+  margin-top: 60px;
 `;
 
 const InfoWrap = styled.div`
@@ -35,12 +35,14 @@ const InfoWrap = styled.div`
 
 const MenuContainer = styled.div`
   width: 50%;
-  height: 160px;
+  height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 10px;
+  margin-bottom: 60px;
+  border-top: 1px solid #d0d0d0;
   & button {
     background: none;
     border: none;
@@ -48,9 +50,9 @@ const MenuContainer = styled.div`
   }
 `;
 
-const MyPaintContainer = styled.div`
+const UploadContainer = styled.div`
   width: 50%;
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,8 +81,30 @@ const MenuWrap = styled.div`
   margin: 10px;
 `;
 
+const MyArtContainer = styled.div`
+  width: 100%;
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Content = styled.div`
+  width: 50%;
+  height: 30px;
+  font-size: 1.1rem;
+  padding: 10px;
+`;
+
+const MyArtWrap = styled.div`
+  width: 90%;
+  height: 320px;
+  margin-top: 15px;
+`;
+
 const Profile = ({ userObj }) => {
-  // console.log(userObj);
+  const [myArts, setMyArts] = useState([]);
   const history = useHistory();
 
   const onLogOutClick = async () => {
@@ -89,6 +113,29 @@ const Profile = ({ userObj }) => {
       await authService.signOut().then(() => history.push('/'));
     }
   };
+  const getMyArts = async () => {
+    const paints = await dbService
+      .collection('paints')
+      .where('creatorId', '==', userObj.uid)
+      .orderBy('createdAt')
+      .get();
+
+    const goods = await dbService
+      .collection('goods')
+      .where('creatorId', '==', userObj.uid)
+      .orderBy('createdAt')
+      .get();
+
+    const paintData = paints.docs.map((doc) => doc.data());
+    const goodsData = goods.docs.map((doc) => doc.data());
+
+    setMyArts(paintData.concat(goodsData));
+  };
+
+  useEffect(() => {
+    getMyArts();
+  }, []);
+
   return (
     <>
       <ProfileContainer>
@@ -114,7 +161,7 @@ const Profile = ({ userObj }) => {
             )}
           </InfoWrap>
         </InfoContainer>
-        <MyPaintContainer>
+        <UploadContainer>
           <div>
             <span role="img" aria-labelledby="paint">
               🖼
@@ -131,13 +178,20 @@ const Profile = ({ userObj }) => {
               <button> 굿즈 등록하기</button>
             </Link>
           </div>
-          <div>
+        </UploadContainer>
+        <MyArtContainer>
+          <Content>
             <span role="img" aria-labelledby="art">
               🎨
-            </span>
-            <button> 내 작품 보러가기</button>
-          </div>
-        </MyPaintContainer>
+            </span>{' '}
+            등록한 작품
+          </Content>
+          <MyArtWrap>
+            {myArts.map((art) => (
+              <div key={art.name}>{art.artist}</div>
+            ))}
+          </MyArtWrap>
+        </MyArtContainer>
         <MenuContainer>
           <MenuWrap>
             <span role="img" aria-labelledby="home">
