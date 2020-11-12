@@ -136,7 +136,8 @@ export default function Menu({ userObj }) {
             {collections.map((collection) => (
               <Post
                 key={collection.id}
-                userObj={collection}
+                userObj={userObj}
+                artData={collection}
                 select={select}
               ></Post>
             ))}
@@ -145,7 +146,12 @@ export default function Menu({ userObj }) {
           <MenuGrid>
             <>
               {goods.map((good) => (
-                <Post key={good.id} userObj={good} select={select}></Post>
+                <Post
+                  key={good.id}
+                  userObj={userObj}
+                  artData={good}
+                  select={select}
+                ></Post>
               ))}
             </>
           </MenuGrid>

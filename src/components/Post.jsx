@@ -60,33 +60,34 @@ const PostDetail = styled.p`
   color: #8c8c8c;
 `;
 
-const Post = ({ userObj, select }) => {
+const Post = ({ userObj, artData, select }) => {
   const [description, setDescription] = useState('');
   const { theme } = useContext(ThemeContext);
+  const isUser = Boolean(userObj);
 
   useEffect(() => {
-    if (userObj.description.length >= 30) {
-      setDescription(userObj.description.substr(0, 30).concat('...'));
+    if (artData.description.length >= 30) {
+      setDescription(artData.description.substr(0, 30).concat('...'));
     } else {
-      setDescription(userObj.description);
+      setDescription(artData.description);
     }
-  }, [userObj.description]);
+  }, [artData.description]);
 
   return (
     <PostContainer>
       <PostPhotoWrap>
-        {userObj.attachmentUrl && (
+        {artData.attachmentUrl && (
           <Link
             to={{
               pathname:
                 select === 'collections'
-                  ? `/paint/${userObj.id}`
-                  : `/goods/${userObj.id}`,
-              state: userObj,
+                  ? `/paint/${artData.id}`
+                  : `/goods/${artData.id}`,
+              state: { artData, isUser },
             }}
           >
             <img
-              src={userObj.attachmentUrl}
+              src={artData.attachmentUrl}
               alt="attachment"
               width="50px"
               height="50px"
@@ -95,11 +96,11 @@ const Post = ({ userObj, select }) => {
         )}
       </PostPhotoWrap>
       <PostDescription themeProps={theme}>
-        <PostTitle>{userObj.name}</PostTitle>
+        <PostTitle>{artData.name}</PostTitle>
         <PostDetail>
-          <span>{userObj.artist}</span>
+          <span>{artData.artist}</span>
           <span>{description}</span>
-          <span>{userObj.price}원</span>
+          <span>{artData.price}원</span>
         </PostDetail>
       </PostDescription>
     </PostContainer>
