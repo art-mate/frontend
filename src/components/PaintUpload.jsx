@@ -178,6 +178,7 @@ const PaintUpload = ({ userObj }) => {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [attachment, setAttachment] = useState();
+  const [year, setYear] = useState('');
 
   const history = useHistory();
 
@@ -186,7 +187,6 @@ const PaintUpload = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(11);
     let attachmentUrl = '';
     if (attachment !== '') {
       const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
@@ -198,6 +198,7 @@ const PaintUpload = ({ userObj }) => {
       artist: artist,
       price: price,
       description: description,
+      year: year,
       createdAt: Date.now(),
       creatorId: userObj.uid,
       attachmentUrl,
@@ -224,6 +225,8 @@ const PaintUpload = ({ userObj }) => {
       setDescription(value);
     } else if (name === 'price') {
       setPrice(value);
+    } else if (name === 'year') {
+      setYear(value);
     }
   };
 
@@ -269,6 +272,16 @@ const PaintUpload = ({ userObj }) => {
               onChange={onChange}
               type="text"
               maxLength={50}
+            />
+          </InputWrap>
+          <InputWrap>
+            <label htmlFor="year">제작년도</label>
+            <input
+              name="year"
+              value={year}
+              onChange={onChange}
+              type="text"
+              maxLength={10}
             />
           </InputWrap>
           <InputWrap>

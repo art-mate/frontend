@@ -55,9 +55,16 @@ const PostDetail = styled.p`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  font-size: 14px;
   line-height: 1.4;
+  font-size: 14px;
+`;
+
+const SubTitle = styled.span`
   color: #8c8c8c;
+`;
+
+const Content = styled.span`
+  margin-left: 10px;
 `;
 
 const Post = ({ userObj, artData, select }) => {
@@ -98,9 +105,18 @@ const Post = ({ userObj, artData, select }) => {
       <PostDescription themeProps={theme}>
         <PostTitle>{artData.name}</PostTitle>
         <PostDetail>
-          <span>{artData.artist}</span>
-          <span>{description}</span>
-          <span>{artData.price}원</span>
+          <div>
+            <SubTitle>작가명</SubTitle>
+            <Content>{artData.artist}</Content>
+          </div>
+          <div>
+            <SubTitle>제작년도</SubTitle>
+            <Content>{artData.year}</Content>
+          </div>
+          <div>
+            <SubTitle>가격</SubTitle>
+            <Content>{artData.price}원</Content>
+          </div>
         </PostDetail>
       </PostDescription>
     </PostContainer>

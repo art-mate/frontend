@@ -19,7 +19,7 @@ const PhotoWrap = styled.div`
 const TitleWrap = styled.div`
   width: 100%;
   height: 60px;
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +28,7 @@ const TitleWrap = styled.div`
 
 const InfoContainer = styled.div`
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,13 +50,14 @@ const SubTitle = styled.span`
 `;
 
 const Content = styled.span`
-  margin-left: 20px;
+  margin-left: 10px;
   font-size: 15px;
 `;
 
 const Description = styled.p`
   line-height: 1.5;
   font-size: 15px;
+  margin-top: 5px;
 `;
 
 const Detail = ({ location }) => {
@@ -81,7 +82,7 @@ const Detail = ({ location }) => {
             </div>
             <div>
               <SubTitle>제작년도</SubTitle>
-              <Content>{artData.createAt}</Content>
+              <Content>{artData.year}</Content>
             </div>
             <div>
               <SubTitle>가격</SubTitle>
