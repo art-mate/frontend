@@ -5,37 +5,35 @@ import styled from 'styled-components';
 import { dbService, storageService } from '../fBase';
 import { v4 as uuidv4 } from 'uuid';
 import { BiUpload } from 'react-icons/bi';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const UploadContainer = styled.div`
   position: absolute;
   left: 0;
   top: 0;
   width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 `;
 
 const UploadFormWrap = styled.div`
-  width: 40%;
-  min-width: 530px;
-  height: 650px;
+  width: 55%;
+  min-width: 600px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 5px 13px rgba(0, 0, 0, 0.3);
   background: ${(props) => props.themeProps.navBar};
 `;
 
 const UploadForm = styled.form`
-  max-width: 550px;
-  min-width: 420px;
-  width: 50%;
+  min-width: 550px;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,6 +43,7 @@ const UploadForm = styled.form`
 const InputWrap = styled.div`
   width: 100%;
   height: 80px;
+  margin-top: 20px;
   & input {
     padding: 15px;
     width: 100%;
@@ -59,6 +58,7 @@ const InputWrap = styled.div`
 
 const DescriptionWrap = styled.div`
   width: 100%;
+  margin-top: 20px;
   & textarea {
     padding: 15px;
     width: 100%;
@@ -73,18 +73,19 @@ const DescriptionWrap = styled.div`
 `;
 
 const FileUploadContainer = styled.div`
-  width: 40%;
-  height: 650px;
+  width: 100%;
+  height: 550px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 `;
 
 const ButtonContainer = styled.div`
-  width: 420px;
-  height: 80px;
+  min-width: 550px;
+  width: 60%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -98,11 +99,12 @@ const ButtonContainer = styled.div`
 const ContentWrap = styled.div`
   width: 100%;
   height: 40px;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
   margin-bottom: 20px;
 `;
 
@@ -110,49 +112,38 @@ const Preview = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 10px;
-`;
 
-const FileUploadWrap = styled.div`
-  width: 250px;
-  height: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  background: #fcfcfc;
-  cursor: pointer;
-  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
-
-  & svg {
-    color: #686869;
-  }
-
-  &:hover {
-    background: #e0e0e0;
+  & img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
   }
 `;
 
 const ContentsWrap = styled.div`
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 550px;
+  border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 `;
 
-const CaptionWrap = styled.div`
-  width: 80%;
-  height: 10%;
+const FileWrap = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const UploadCancelButton = styled.button`
-  background: none;
-  border: none;
-  & svg {
-    color: black;
+  background: ${(props) => props.themeProps.body};
+  cursor: pointer;
+  border-radius: 8px;
+  border: 4px dashed ${(props) => props.themeProps.text};
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -162,10 +153,11 @@ const CancelButton = styled.button`
   border-radius: 8px;
   border: none;
   color: white;
-  background: #ff3c3c;
+  background: #000000;
   font-size: 0.8rem;
   cursor: pointer;
   margin-top: 30px;
+  margin-bottom: 40px;
 `;
 
 const SubmitButton = styled.input`
@@ -174,7 +166,7 @@ const SubmitButton = styled.input`
   border-radius: 8px;
   border: none;
   color: white;
-  background: #e6328d;
+  background: #cf2020;
   font-size: 0.8rem;
   cursor: pointer;
   margin-top: 30px;
@@ -212,7 +204,7 @@ const GoodsUpload = ({ userObj }) => {
     await dbService
       .collection('goods')
       .add(GoodsObj)
-      .then(() => alert('등록 완료'))
+      .then(() => alert('굿즈 등록이 완료되었습니다.'))
       .then(() => history.push('/'))
       .catch((error) => alert(error.message));
     setGoods('');
@@ -249,45 +241,12 @@ const GoodsUpload = ({ userObj }) => {
     reader.readAsDataURL(file);
   };
 
-  const onClearAttachment = () => {
-    setAttachment(null);
-  };
-
   const handleFileClick = (event) => {
     hiddenFileInput.current.click();
   };
 
   return (
     <UploadContainer>
-      <FileUploadContainer>
-        <ContentsWrap>
-          {attachment ? (
-            <Preview>
-              <img src={attachment} alt="attachment" />
-            </Preview>
-          ) : (
-            <FileUploadWrap onClick={handleFileClick}>
-              <BiUpload size={70} />
-            </FileUploadWrap>
-          )}
-        </ContentsWrap>
-        <CaptionWrap>
-          {attachment ? (
-            <UploadCancelButton onClick={onClearAttachment}>
-              <AiOutlineCloseCircle size={30} />
-            </UploadCancelButton>
-          ) : (
-            <p>여기서 사진을 업로드하고 미리보기로 보실 수 있습니다.</p>
-          )}
-        </CaptionWrap>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={onFileChange}
-          ref={hiddenFileInput}
-          style={{ display: 'none' }}
-        />
-      </FileUploadContainer>
       <UploadFormWrap themeProps={theme}>
         <ContentWrap>굿즈 등록</ContentWrap>
         <UploadForm onSubmit={onSubmit}>
@@ -325,11 +284,34 @@ const GoodsUpload = ({ userObj }) => {
               maxLength={120}
             />
           </DescriptionWrap>
+          <FileUploadContainer>
+            {attachment ? (
+              <ContentsWrap>
+                <Preview>
+                  <img src={attachment} alt="attachment" />
+                </Preview>
+              </ContentsWrap>
+            ) : (
+              <FileWrap onClick={handleFileClick} themeProps={theme}>
+                <BiUpload size={70} />
+                <p style={{ marginTop: '20px' }}>
+                  여기서 사진을 업로드하고 미리보기로 보실 수 있습니다.
+                </p>
+              </FileWrap>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={onFileChange}
+              ref={hiddenFileInput}
+              style={{ display: 'none' }}
+            />
+          </FileUploadContainer>
           <SubmitButton type="submit" value="등록" />
         </UploadForm>
         <ButtonContainer>
           <Link to="/">
-            <CancelButton>Cancel</CancelButton>
+            <CancelButton>취소</CancelButton>
           </Link>
         </ButtonContainer>
       </UploadFormWrap>
