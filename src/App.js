@@ -7,7 +7,7 @@ import { lightTheme, darkTheme } from './theme';
 import { authService } from './fBase';
 
 export const ThemeContext = createContext({
-  theme: lightTheme,
+  theme: darkTheme,
   setTheme: () => {},
 });
 

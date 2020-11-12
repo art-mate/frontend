@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
 import { ThemeContext } from '../App';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { dbService, storageService } from '../fBase';
 import { v4 as uuidv4 } from 'uuid';
@@ -187,6 +187,8 @@ const PaintUpload = ({ userObj }) => {
   const [description, setDescription] = useState('');
   const [attachment, setAttachment] = useState();
 
+  const history = useHistory();
+
   const { theme } = useContext(ThemeContext);
   const hiddenFileInput = useRef(null);
 
@@ -212,6 +214,7 @@ const PaintUpload = ({ userObj }) => {
       .collection('paints')
       .add(paintObj)
       .then(() => alert('등록 완료'))
+      .then(() => history.push('/'))
       .catch((error) => alert(error.message));
     setPaint('');
     setAttachment('');

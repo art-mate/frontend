@@ -23,15 +23,6 @@ const InputContainer = styled.div`
   background: rgba(0, 0, 0, 0.1);
 `;
 
-const SideContainer = styled.div`
-  width: 40%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const LoginContainer = styled.div`
   width: 100%;
 `;
@@ -46,12 +37,12 @@ const LoginFormWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
 `;
 
 const LoginForm = styled.form`
   max-width: 550px;
-  min-width: 420px;
+  min-width: 380px;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -84,7 +75,7 @@ const LoginButtonWrap = styled.div`
     border-radius: 8px;
     border: none;
     color: white;
-    background: #e6328d;
+    background: #cf2020;
     font-size: 0.8rem;
     cursor: pointer;
   }
@@ -93,7 +84,8 @@ const LoginButtonWrap = styled.div`
 const GoogleLoginWrap = styled.div`
   max-width: 500px;
   width: 50%;
-  min-width: 420px;
+  min-width: 380px;
+  height: 80px;
 
   & button {
     display: flex;
@@ -122,62 +114,34 @@ const ErrorMsgWrap = styled.div`
   font-size: 0.8rem;
 `;
 
-const CheckNewUserContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: rgba(86, 86, 86, 0.3);
-  backdrop-filter: blur(6px);
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: ${(props) => (props.checkUser ? 'none' : 'flex')};
+const CheckNewUserWrap = styled.div`
+  max-width: 500px;
+  width: 50%;
+  min-width: 380px;
+  height: 45px;
+  display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const CheckNewUserWrap = styled.div`
-  width: 400px;
-  height: 330px;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 10px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-
-  & button {
-    padding: 15px;
-    width: 60%;
-    border-radius: 8px;
-    border: none;
-    color: white;
-    background: #e6328d;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-
-  & span {
-    font-size: 2.5rem;
-  }
+  margin-top: 10px;
+  font-size: 14px;
 `;
 
 const SignInContentWrap = styled.div`
   width: 100%;
   height: 40px;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 `;
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
   const [checkUser, setCheckUser] = useState(false);
   const history = useHistory();
 
@@ -242,27 +206,6 @@ const Auth = () => {
   return (
     <>
       <AuthContainer>
-        <CheckNewUserContainer checkUser={checkUser}>
-          <CheckNewUserWrap>
-            <span role="img" aria-labelledby="art">
-              🧑‍🎨
-            </span>
-            <button onClick={onLoginClick}>로그인</button>
-            <button
-              style={{ background: 'white', color: 'black' }}
-              onClick={onRegisterClick}
-            >
-              회원가입
-            </button>
-          </CheckNewUserWrap>
-        </CheckNewUserContainer>
-        {/* <SideContainer>
-          <SideContent>
-            <span role="img" aria-labelledby="art">
-              🎨
-            </span>
-          </SideContent>
-        </SideContainer> */}
         <InputContainer>
           <LoginFormWrap>
             <LoginForm onSubmit={onSubmit}>
@@ -318,6 +261,38 @@ const Auth = () => {
               </button>
               {/* <button name="facebook" onClick={onSocialClick}>Facebook</button> */}
             </GoogleLoginWrap>
+            <CheckNewUserWrap>
+              {newAccount ? (
+                <>
+                  <span
+                    onClick={onLoginClick}
+                    style={{
+                      fontSize: '15px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    로그인
+                  </span>
+                </>
+              ) : (
+                <>
+                  계정이 없으신가요?{' '}
+                  <span
+                    onClick={onRegisterClick}
+                    style={{
+                      marginLeft: '10px',
+                      fontSize: '15px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {' '}
+                    회원가입
+                  </span>
+                </>
+              )}
+            </CheckNewUserWrap>
           </LoginFormWrap>
         </InputContainer>
       </AuthContainer>

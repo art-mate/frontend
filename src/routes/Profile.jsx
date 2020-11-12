@@ -83,10 +83,12 @@ const Profile = ({ userObj }) => {
   // console.log(userObj);
   const history = useHistory();
 
-  const onLogOutClick = () => {
-    authService.signOut().then(history.push('/'));
+  const onLogOutClick = async () => {
+    const ok = window.confirm('로그아웃 하시겠습니까?');
+    if (ok) {
+      await authService.signOut().then(() => history.push('/'));
+    }
   };
-
   return (
     <>
       <ProfileContainer>

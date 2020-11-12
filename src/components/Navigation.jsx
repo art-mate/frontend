@@ -4,6 +4,7 @@ import DarkModeToggle from './DarkModeToggle';
 import { ThemeContext } from '../App';
 import ScrollToTop from './ScrollToTop';
 import { Link } from 'react-router-dom';
+import logo from '../static/images/logo.svg';
 
 import { FaUserCircle } from 'react-icons/fa';
 import { AiOutlineEllipsis } from 'react-icons/ai';
@@ -40,8 +41,12 @@ const TitleContainer = styled.header`
     align-items: center;
     font-family: 'Dancing Script', cursive;
     color: ${(props) =>
-      props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+      props.themeProps.body === '#fcfcfc' ? '#ce1818' : '#fafafa'};
     transition: all 0.5s ease-in-out;
+  }
+
+  & img {
+    width: 40px;
   }
 `;
 
@@ -62,7 +67,7 @@ const LoginButton = styled.button`
   border: none;
   &:hover {
     color: ${(props) =>
-      props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+      props.themeProps.body === '#fcfcfc' ? '#ce1818' : '#fafafa'};
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -91,7 +96,9 @@ export default function Navigation({ userObj }) {
     <NavContainer navBar={theme.navBar}>
       <NavContentContainer>
         <TitleContainer themeProps={theme}>
-          <Link to="/">artmate</Link>
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
         </TitleContainer>
         <DarkModeToggle />
         <InfoContainer>

@@ -27,40 +27,37 @@ const MenuSelector = styled.div`
 `;
 
 const CollectionMenu = styled.div`
-  width: 30%;
+  width: 50%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 17px;
+  font-size: 1rem;
   color: ${(props) =>
-    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
+    props.themeProps.body === '#fcfcfc' ? '#cf2020' : '#fafafa'};
+  cursor: pointer;
 
-  & span {
-    cursor: pointer;
+  &:hover {
+    background: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? 'rgba(0,0,0,.1)' : '#4c4c4c'};
   }
 `;
 
 const GoodsMenu = styled.div`
-  width: 30%;
+  width: 50%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 17px;
+  font-size: 1rem;
   color: ${(props) =>
-    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
-  & span {
-    cursor: pointer;
-  }
-`;
+    props.themeProps.body === '#fcfcfc' ? '#cf2020' : '#fafafa'};
+  cursor: pointer;
 
-const UploadContainer = styled.div`
-  width: 85%;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &:hover {
+    background: ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? 'rgba(0,0,0,.1)' : '#4c4c4c'};
+  }
 `;
 
 const MenuGrid = styled.div`
@@ -83,27 +80,6 @@ const MenuGrid = styled.div`
   @media screen and (max-width: 430px) {
     grid-template-columns: repeat(1, 1fr);
   }
-`;
-
-const UploadMenu = styled.div`
-  width: 30%;
-  height: 100%;
-  font-size: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${(props) =>
-    props.themeProps.body === '#fcfcfc' ? '#e6328d' : '#fafafa'};
-`;
-
-const SelectModal = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 60%;
-  height: 80%;
-  background: white;
-  transform: translateX(-50%) translateY(-50%);
 `;
 
 export default function Menu({ userObj }) {
@@ -142,14 +118,6 @@ export default function Menu({ userObj }) {
     setSelect('goods');
   };
 
-  const handleClick = () => {
-    alert('로그인이 필요한 서비스입니다 🙅');
-  };
-
-  const uploadSelect = () => {
-    setSelectModal((prev) => !prev);
-  };
-
   return (
     <>
       <MenuContainer>
@@ -173,9 +141,11 @@ export default function Menu({ userObj }) {
           </MenuGrid>
         ) : (
           <MenuGrid>
-            {goods.map((good) => (
-              <Post key={good.id} userObj={good}></Post>
-            ))}
+            <>
+              {goods.map((good) => (
+                <Post key={good.id} userObj={good}></Post>
+              ))}
+            </>
           </MenuGrid>
         )}
       </MenuContainer>

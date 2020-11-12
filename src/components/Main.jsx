@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
-import MainImage from '../static/images/mainImage.png';
 
 const MainContainer = styled.main`
   width: 100%;
@@ -17,7 +16,7 @@ const IntroSection = styled.section`
   justify-content: center;
   align-items: center;
   padding-top: 60px;
-  background: linear-gradient(45deg, #4e06da, #f15e5e);
+  background: linear-gradient(45deg, #ce1818, #49b941);
 `;
 
 const ContentContainer = styled.section`
@@ -39,15 +38,6 @@ const MainContent = styled.div`
     justify-content: center;
     margin-bottom: 15px;
   }
-`;
-
-const ImageSection = styled.figure`
-  width: 65%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 `;
 
 const DetailButton = styled.button`
@@ -79,7 +69,7 @@ export default function Main() {
 
   return (
     <MainContainer>
-      <IntroSection image={MainImage}>
+      <IntroSection>
         <ContentContainer>
           <MainContent>
             <SubHead>모든 예술가를 위한 플랫폼</SubHead>
@@ -89,20 +79,6 @@ export default function Main() {
           </MainContent>
           <DetailButton themeProps={theme}>더 알아보기</DetailButton>
         </ContentContainer>
-        {/* <ImageSection>
-          <img src={MainImage} alt="main" />
-          <figcaption
-            style={{
-              position: 'absolute',
-              left: '50%',
-              bottom: '10px',
-              color: 'white',
-              fontSize: '10px',
-            }}
-          >
-            진주 귀걸이를 한 소녀
-          </figcaption>
-        </ImageSection> */}
       </IntroSection>
     </MainContainer>
   );
