@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import MyPaint from '../components/MyPaint';
 
 import { authService, dbService } from '../fBase';
 import { Link } from 'react-router-dom';
+import MyGoods from '../components/MyGoods';
 
 const ProfileContainer = styled.div`
   width: 100%;
@@ -82,8 +84,7 @@ const MenuWrap = styled.div`
 `;
 
 const MyArtContainer = styled.div`
-  width: 100%;
-  height: 430px;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,18 +94,37 @@ const MyArtContainer = styled.div`
 const Content = styled.div`
   width: 50%;
   height: 30px;
-  font-size: 1.1rem;
+  font-size: 20px;
   padding: 10px;
 `;
 
-const MyArtWrap = styled.div`
-  width: 90%;
-  height: 320px;
-  margin-top: 15px;
+const MyPaintContainer = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+`;
+
+const MyGoodsContainer = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+`;
+
+const MyArtMenu = styled.div`
+  width: 58%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8f8f8f;
+  padding: 8px;
+  margin-top: 5px;
 `;
 
 const Profile = ({ userObj }) => {
-  const [myArts, setMyArts] = useState([]);
+  const [myPaints, setMyPaints] = useState([]);
+  const [myGoods, setMyGoods] = useState([]);
   const history = useHistory();
 
   const onLogOutClick = async () => {
@@ -129,7 +149,8 @@ const Profile = ({ userObj }) => {
     const paintData = paints.docs.map((doc) => doc.data());
     const goodsData = goods.docs.map((doc) => doc.data());
 
-    setMyArts(paintData.concat(goodsData));
+    setMyPaints(paintData);
+    setMyGoods(goodsData);
   };
 
   useEffect(() => {
@@ -180,17 +201,20 @@ const Profile = ({ userObj }) => {
           </div>
         </UploadContainer>
         <MyArtContainer>
-          <Content>
-            <span role="img" aria-labelledby="art">
-              🎨
-            </span>{' '}
-            등록한 작품
-          </Content>
-          <MyArtWrap>
-            {myArts.map((art) => (
-              <div key={art.name}>{art.artist}</div>
-            ))}
-          </MyArtWrap>
+          <MyArtMenu>
+            {userObj.displayName ? userObj.displayName : userObj.email}님의 그림
+          </MyArtMenu>
+          <MyPaintContainer>
+            {myPaints &&
+              myPaints.map((art) => <MyPaint key={art.name} myPaint={art} />)}
+          </MyPaintContainer>
+          <MyArtMenu>
+            {userObj.displayName ? userObj.displayName : userObj.email}님의 굿즈
+          </MyArtMenu>
+          <MyGoodsContainer>
+            {myGoods &&
+              myGoods.map((art) => <MyGoods key={art.name} myGoods={art} />)}
+          </MyGoodsContainer>
         </MyArtContainer>
         <MenuContainer>
           <MenuWrap>

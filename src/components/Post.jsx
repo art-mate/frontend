@@ -49,7 +49,7 @@ const PostTitle = styled.h4`
   font-weight: bold;
 `;
 
-const PostDetail = styled.p`
+const PostDetail = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
