@@ -57,7 +57,7 @@ const DetailButton = styled.button`
 `;
 
 const SubHead = styled.h3`
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   display: flex;
   justify-content: center;
   margin-bottom: 25px;

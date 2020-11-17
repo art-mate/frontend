@@ -1,7 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 import Navigation from '../components/Navigation';
+import {
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+  AiFillHeart,
+} from 'react-icons/ai';
+
+import { dbService } from '../fBase';
 
 const DetailContainer = styled.div`
   width: 100%;
@@ -60,9 +67,51 @@ const Description = styled.p`
   margin-top: 5px;
 `;
 
+const LikesStore = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  @media screen and (max-width: 720px) {
+    top: unset;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 70px;
+    flex-direction: row;
+  }
+  width: 70px;
+  height: 180px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background: ${(props) =>
+    props.themeProps.body === '#fcfcfc' ? props.themeProps.body : '#353535'};
+  border: 1px solid
+    ${(props) =>
+      props.themeProps.body === '#fcfcfc' ? 'rgba(0,0,0,.01)' : '#353535'};
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+
+  & div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+  }
+`;
+
 const Detail = ({ location }) => {
   const { theme } = useContext(ThemeContext);
   const { artData, isUser } = location.state;
+
+  const [isLiked, setIsLiked] = useState(
+    artData.likes.includes(artData.creatorId),
+  );
 
   useEffect(() => {
     window.scrollTo({
@@ -99,6 +148,14 @@ const Detail = ({ location }) => {
           </InfoWrap>
         </InfoContainer>
       </DetailContainer>
+      <LikesStore themeProps={theme}>
+        <div>
+          <AiOutlineShoppingCart size={37} />
+        </div>
+        <div>
+          {isLiked ? <AiFillHeart size={37} /> : <AiOutlineHeart size={37} />}
+        </div>
+      </LikesStore>
     </>
   );
 };

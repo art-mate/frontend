@@ -60,7 +60,6 @@ const GoodsMenu = styled.div`
 `;
 
 const MenuGrid = styled.div`
-  width: 80%;
   display: grid;
   margin-bottom: 60px;
   margin-top: 30px;
@@ -68,15 +67,11 @@ const MenuGrid = styled.div`
   grid-row-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1150px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media screen and (max-width: 500px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  @media screen and (max-width: 430px) {
+  @media screen and (max-width: 770px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;

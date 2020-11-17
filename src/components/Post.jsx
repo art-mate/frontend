@@ -2,17 +2,18 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { GoHeart } from 'react-icons/go';
+
+import { dbService } from '../fBase';
 
 const PostContainer = styled.div`
-  width: 26vw;
-  height: 28vw;
-  min-width: 260px;
-  min-height: 490px;
+  width: 23vw;
+  height: 26vw;
+  min-width: 340px;
+  min-height: 450px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  @media screen and (max-width: 430px) {
-    min-width: 300px;
-    min-height: 300px;
-  }
+  position: relative;
 `;
 
 const PostPhotoWrap = styled.figure`
@@ -34,19 +35,9 @@ const PostDescription = styled.figcaption`
   background: ${(props) => props.themeProps.navBar};
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 1rem;
-`;
-
-const PostTitle = styled.h4`
-  width: 100%;
-  margin-bottom: 10px;
-  display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
-  font-weight: bold;
+  padding: 0.8rem;
 `;
 
 const PostDetail = styled.div`
@@ -55,8 +46,8 @@ const PostDetail = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  line-height: 1.4;
-  font-size: 14px;
+  line-height: 1.5;
+  font-size: 13px;
 `;
 
 const SubTitle = styled.span`
@@ -67,9 +58,58 @@ const Content = styled.span`
   margin-left: 10px;
 `;
 
+const LikesButton = styled.div`
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+
+  & svg {
+    color: #da0000;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+`;
+
 const Post = ({ userObj, artData, select }) => {
   const { theme } = useContext(ThemeContext);
   const isUser = Boolean(userObj);
+
+  const [isLiked, setIsLiked] = useState(
+    artData.likes.includes(artData.creatorId),
+  );
+
+  const onLikesClick = async () => {
+    if (Array.isArray(artData.likes) && artData.likes.length) {
+      const likes = artData.likes;
+      if (isLiked) {
+        const idx = likes.indexOf(artData.creatorId);
+        if (idx > -1) likes.splice(idx, 1);
+      } else {
+        likes.push(artData.creatorId);
+      }
+      if (select === 'collection') {
+        await dbService.doc(`paints/${artData.id}`).update({ likes: likes });
+      } else {
+        await dbService.doc(`goods/${artData.id}`).update({ likes: likes });
+      }
+    } else {
+      if (select === 'collection') {
+        await dbService
+          .doc(`paints/${artData.id}`)
+          .update({ likes: [`${artData.creatorId}`] });
+      } else {
+        await dbService
+          .doc(`goods/${artData.id}`)
+          .update({ likes: [artData.uid] });
+      }
+    }
+    setIsLiked((prev) => !prev);
+  };
 
   return (
     <PostContainer>
@@ -94,8 +134,12 @@ const Post = ({ userObj, artData, select }) => {
         )}
       </PostPhotoWrap>
       <PostDescription themeProps={theme}>
-        <PostTitle>{artData.name}</PostTitle>
+        {/* <PostTitle>{artData.name}</PostTitle> */}
         <PostDetail>
+          <div>
+            <SubTitle>작품명</SubTitle>
+            <Content>{artData.name}</Content>
+          </div>
           <div>
             <SubTitle>작가명</SubTitle>
             <Content>{artData.artist}</Content>
@@ -108,8 +152,30 @@ const Post = ({ userObj, artData, select }) => {
             <SubTitle>가격</SubTitle>
             <Content>{artData.price}원</Content>
           </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <span
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: '#ce1818',
+              }}
+            >
+              <GoHeart size={15} />
+            </span>
+            <Content>{artData.likes.length}</Content>
+          </div>
         </PostDetail>
       </PostDescription>
+      <LikesButton onClick={onLikesClick}>
+        {isLiked ? <AiFillHeart size={25} /> : <AiOutlineHeart size={25} />}
+      </LikesButton>
     </PostContainer>
   );
 };
