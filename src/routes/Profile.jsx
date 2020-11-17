@@ -122,6 +122,15 @@ const MyArtMenu = styled.div`
   margin-top: 5px;
 `;
 
+const NotImage = styled.div`
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Profile = ({ userObj, refreshUser }) => {
   const [myPaints, setMyPaints] = useState([]);
   const [myGoods, setMyGoods] = useState([]);
@@ -212,19 +221,33 @@ const Profile = ({ userObj, refreshUser }) => {
             {userObj.displayName ? userObj.displayName : userObj.email}님의 그림
           </MyArtMenu>
           <MyPaintContainer>
-            {myPaints &&
+            {myPaints.length ? (
               myPaints.map((art) => (
                 <MyPaint key={art[0]} myPaint={art[1]} paintId={art[0]} />
-              ))}
+              ))
+            ) : (
+              <NotImage>
+                <span style={{ fontSize: '1.5rem' }}>
+                  아직 등록한 작품이 없습니다 🙅
+                </span>
+              </NotImage>
+            )}
           </MyPaintContainer>
           <MyArtMenu>
             {userObj.displayName ? userObj.displayName : userObj.email}님의 굿즈
           </MyArtMenu>
           <MyGoodsContainer>
-            {myGoods &&
+            {myGoods.length ? (
               myGoods.map((art) => (
                 <MyGoods key={art[0]} myGoods={art[1]} goodsId={art[0]} />
-              ))}
+              ))
+            ) : (
+              <NotImage>
+                <span style={{ fontSize: '1.5rem' }}>
+                  아직 등록한 작품이 없습니다 🙅
+                </span>
+              </NotImage>
+            )}
           </MyGoodsContainer>
         </MyArtContainer>
         <MenuContainer>
