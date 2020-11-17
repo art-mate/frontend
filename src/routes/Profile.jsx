@@ -138,19 +138,24 @@ const Profile = ({ userObj }) => {
       .collection('paints')
       .where('creatorId', '==', userObj.uid)
       .orderBy('createdAt')
-      .get();
+      .get()
+      .then((querySnapshot) => querySnapshot.docs);
 
     const goods = await dbService
       .collection('goods')
       .where('creatorId', '==', userObj.uid)
       .orderBy('createdAt')
-      .get();
+      .get()
+      .then((querySnapshot) => querySnapshot.docs);
 
-    const paintData = paints.docs.map((doc) => doc.data());
-    const goodsData = goods.docs.map((doc) => doc.data());
+    const paintData = paints.map((doc) => [doc.id].concat(doc.data()));
+    const goodsData = goods.map((doc) => [doc.id].concat(doc.data()));
 
     setMyPaints(paintData);
     setMyGoods(goodsData);
+
+    // console.log(paintData);
+    // console.log(goodsData);
   };
 
   useEffect(() => {
@@ -206,14 +211,18 @@ const Profile = ({ userObj }) => {
           </MyArtMenu>
           <MyPaintContainer>
             {myPaints &&
-              myPaints.map((art) => <MyPaint key={art.name} myPaint={art} />)}
+              myPaints.map((art) => (
+                <MyPaint key={art[0]} myPaint={art[1]} paintId={art[0]} />
+              ))}
           </MyPaintContainer>
           <MyArtMenu>
             {userObj.displayName ? userObj.displayName : userObj.email}님의 굿즈
           </MyArtMenu>
           <MyGoodsContainer>
             {myGoods &&
-              myGoods.map((art) => <MyGoods key={art.name} myGoods={art} />)}
+              myGoods.map((art) => (
+                <MyGoods key={art[0]} myGoods={art[1]} goodsId={art[0]} />
+              ))}
           </MyGoodsContainer>
         </MyArtContainer>
         <MenuContainer>

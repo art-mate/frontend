@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { dbService, storageService } from '../fBase';
 
 const MyGoodsWrap = styled.div`
   margin: 5px;
@@ -28,9 +28,7 @@ const MyGoodsContent = styled.div`
   }
 `;
 
-const MyGoods = ({ myGoods }) => {
-  const [editing, setEditing] = useState(false);
-
+const MyGoods = ({ myGoods, goodsId }) => {
   return (
     <>
       <MyGoodsWrap>
@@ -38,7 +36,14 @@ const MyGoods = ({ myGoods }) => {
           <img src={myGoods.attachmentUrl} alt="myGoods" />
         </MyGoodsPhoto>
         <MyGoodsContent>
-          <span>수정</span>
+          <Link
+            to={{
+              pathname: '/editg',
+              state: { myGoods, goodsId },
+            }}
+          >
+            <span>수정</span>
+          </Link>
           <span>삭제</span>
         </MyGoodsContent>
       </MyGoodsWrap>

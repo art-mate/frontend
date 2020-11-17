@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { dbService, storageService } from '../fBase';
 
 const MyPaintWrap = styled.div`
   margin: 5px;
@@ -28,9 +28,7 @@ const MyPaintContent = styled.div`
   }
 `;
 
-const MyPaint = ({ myPaint }) => {
-  const [editing, setEditing] = useState(false);
-
+const MyPaint = ({ myPaint, paintId }) => {
   return (
     <>
       <MyPaintWrap>
@@ -38,7 +36,14 @@ const MyPaint = ({ myPaint }) => {
           <img src={myPaint.attachmentUrl} alt="mypaint" />
         </MyPaintPhoto>
         <MyPaintContent>
-          <span>수정</span>
+          <Link
+            to={{
+              pathname: '/editp',
+              state: { myPaint, paintId },
+            }}
+          >
+            <span>수정</span>
+          </Link>
           <span>삭제</span>
         </MyPaintContent>
       </MyPaintWrap>

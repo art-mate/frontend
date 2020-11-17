@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import PaintUpload from './components/PaintUpload';
+import PaintUpload from './routes/PaintUpload';
 import Auth from './routes/Auth';
 import Home from './routes/Home';
 import Profile from './routes/Profile';
-import GoodsUpload from './components/GoodsUpload';
+import GoodsUpload from './routes/GoodsUpload';
 import Detail from './routes/Detail';
+import PaintEditing from './routes/PaintEditing';
+import GoodsEditing from './routes/GoodsEditing';
 
 export default function Router({ userObj }) {
   return (
@@ -35,6 +37,8 @@ export default function Router({ userObj }) {
           ></Route>
           <Route path="/paint/:id" component={Detail} />
           <Route path="/goods/:id" component={Detail} />
+          <Route path="/editp" exact component={PaintEditing} />
+          <Route path="/editg" exact component={GoodsEditing} />
         </Switch>
       </BrowserRouter>
     </>
