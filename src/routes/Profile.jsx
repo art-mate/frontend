@@ -122,7 +122,7 @@ const MyArtMenu = styled.div`
   margin-top: 5px;
 `;
 
-const Profile = ({ userObj }) => {
+const Profile = ({ userObj, refreshUser }) => {
   const [myPaints, setMyPaints] = useState([]);
   const [myGoods, setMyGoods] = useState([]);
   const history = useHistory();
@@ -130,8 +130,10 @@ const Profile = ({ userObj }) => {
   const onLogOutClick = async () => {
     const ok = window.confirm('로그아웃 하시겠습니까?');
     if (ok) {
-      await authService.signOut().then(() => history.push('/'));
+      await authService.signOut();
+      history.push('/');
     }
+    refreshUser();
   };
   const getMyArts = async () => {
     const paints = await dbService

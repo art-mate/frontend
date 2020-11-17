@@ -9,7 +9,7 @@ import Detail from './routes/Detail';
 import PaintEditing from './routes/PaintEditing';
 import GoodsEditing from './routes/GoodsEditing';
 
-export default function Router({ userObj }) {
+export default function Router({ userObj, refreshUser }) {
   return (
     <>
       <BrowserRouter>
@@ -23,7 +23,9 @@ export default function Router({ userObj }) {
           <Route
             path="/profile"
             exact
-            render={() => <Profile userObj={userObj} />}
+            render={() => (
+              <Profile userObj={userObj} refreshUser={refreshUser} />
+            )}
           ></Route>
           <Route
             path="/uploadp"

@@ -25,11 +25,16 @@ function App() {
     });
   }, []);
 
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj(user);
+  };
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <>
         <GlobalStyle theme={theme === lightTheme ? lightTheme : darkTheme} />
-        {init && <Router userObj={userObj} />}
+        {init && <Router userObj={userObj} refreshUser={refreshUser} />}
       </>
     </ThemeContext.Provider>
   );
