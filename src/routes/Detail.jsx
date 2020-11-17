@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 import Navigation from '../components/Navigation';
@@ -63,6 +63,13 @@ const Description = styled.p`
 const Detail = ({ location }) => {
   const { theme } = useContext(ThemeContext);
   const { artData, isUser } = location.state;
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  }, []);
 
   return (
     <>
