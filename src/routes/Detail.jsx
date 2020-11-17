@@ -107,11 +107,7 @@ const LikesStore = styled.div`
 
 const Detail = ({ location }) => {
   const { theme } = useContext(ThemeContext);
-  const { artData, isUser } = location.state;
-
-  const [isLiked, setIsLiked] = useState(
-    artData.likes.includes(artData.creatorId),
-  );
+  const { artData, isUser, isLiked } = location.state;
 
   useEffect(() => {
     window.scrollTo({

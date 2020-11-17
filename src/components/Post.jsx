@@ -129,7 +129,7 @@ const Post = ({ userObj, artData, select }) => {
                 select === 'collections'
                   ? `/paint/${artData.id}`
                   : `/goods/${artData.id}`,
-              state: { artData, isUser },
+              state: { artData, isUser, isLiked },
             }}
           >
             <img
