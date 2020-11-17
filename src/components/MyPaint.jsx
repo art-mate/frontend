@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { dbService } from '../fBase';
+
 const MyPaintWrap = styled.div`
   margin: 5px;
 `;
@@ -29,6 +31,15 @@ const MyPaintContent = styled.div`
 `;
 
 const MyPaint = ({ myPaint, paintId }) => {
+  const onDeleteClick = async () => {
+    const ok = window.confirm('정말로 삭제하시겠습니까?');
+    if (ok) {
+      await dbService
+        .doc(`paints/${paintId}`)
+        .delete()
+        .then(() => alert('삭제가 완료되었습니다.'));
+    }
+  };
   return (
     <>
       <MyPaintWrap>
@@ -44,7 +55,7 @@ const MyPaint = ({ myPaint, paintId }) => {
           >
             <span>수정</span>
           </Link>
-          <span>삭제</span>
+          <span onClick={onDeleteClick}>삭제</span>
         </MyPaintContent>
       </MyPaintWrap>
     </>
