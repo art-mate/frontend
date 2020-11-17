@@ -79,36 +79,44 @@ const Post = ({ userObj, artData, select }) => {
   const { theme } = useContext(ThemeContext);
   const isUser = Boolean(userObj);
 
-  const [isLiked, setIsLiked] = useState(
-    artData.likes.includes(artData.creatorId),
-  );
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    if (userObj && artData.likes.includes(userObj.uid)) {
+      setIsLiked(true);
+    }
+  }, []);
 
   const onLikesClick = async () => {
-    if (Array.isArray(artData.likes) && artData.likes.length) {
-      const likes = artData.likes;
-      if (isLiked) {
-        const idx = likes.indexOf(artData.creatorId);
-        if (idx > -1) likes.splice(idx, 1);
+    if (userObj) {
+      if (Array.isArray(artData.likes) && artData.likes.length) {
+        const likes = artData.likes;
+        if (artData.likes.includes(userObj.uid)) {
+          const idx = likes.indexOf(userObj.uid);
+          if (idx > -1) likes.splice(idx, 1);
+        } else {
+          likes.push(userObj.uid);
+        }
+        if (select === 'collection') {
+          await dbService.doc(`paints/${artData.id}`).update({ likes: likes });
+        } else {
+          await dbService.doc(`goods/${artData.id}`).update({ likes: likes });
+        }
       } else {
-        likes.push(artData.creatorId);
+        if (select === 'collection') {
+          await dbService
+            .doc(`paints/${artData.id}`)
+            .update({ likes: [`${userObj.uid}`] });
+        } else {
+          await dbService
+            .doc(`goods/${artData.id}`)
+            .update({ likes: [`${userObj.uid}`] });
+        }
       }
-      if (select === 'collection') {
-        await dbService.doc(`paints/${artData.id}`).update({ likes: likes });
-      } else {
-        await dbService.doc(`goods/${artData.id}`).update({ likes: likes });
-      }
+      setIsLiked((prev) => !prev);
     } else {
-      if (select === 'collection') {
-        await dbService
-          .doc(`paints/${artData.id}`)
-          .update({ likes: [`${artData.creatorId}`] });
-      } else {
-        await dbService
-          .doc(`goods/${artData.id}`)
-          .update({ likes: [artData.uid] });
-      }
+      alert('로그인이 필요합니다.');
     }
-    setIsLiked((prev) => !prev);
   };
 
   return (
