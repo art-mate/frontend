@@ -160,6 +160,37 @@ const Detail = ({ location }) => {
     }
   };
 
+  const onCartClick = async () => {
+    if (userObj) {
+      if (Array.isArray(artData.cart) && artData.cart.length) {
+        const carts = artData.cart;
+        if (artData.cart.includes(userObj.uid)) {
+          const idx = carts.indexOf(userObj.uid);
+          if (idx > -1) carts.splice(idx, 1);
+        } else {
+          carts.push(userObj.uid);
+        }
+        if (select === 'collection') {
+          await dbService.doc(`paints/${artData.id}`).update({ cart: carts });
+        } else {
+          await dbService.doc(`goods/${artData.id}`).update({ cart: carts });
+        }
+      } else {
+        if (select === 'collection') {
+          await dbService
+            .doc(`paints/${artData.id}`)
+            .update({ cart: [`${userObj.uid}`] });
+        } else {
+          await dbService
+            .doc(`goods/${artData.id}`)
+            .update({ cart: [`${userObj.uid}`] });
+        }
+      }
+    } else {
+      alert('로그인이 필요합니다.');
+    }
+  };
+
   return (
     <>
       <Navigation userObj={isUser} />
@@ -190,7 +221,7 @@ const Detail = ({ location }) => {
       </DetailContainer>
       <LikesStore themeProps={theme}>
         <div>
-          <AiOutlineShoppingCart size={37} />
+          <AiOutlineShoppingCart size={37} onClick={onCartClick} />
         </div>
         <div>
           {detailLikes ? (
