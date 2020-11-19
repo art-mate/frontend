@@ -9,8 +9,8 @@ const MyGoodsWrap = styled.div`
 `;
 
 const MyGoodsPhoto = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 180px;
+  height: 180px;
 `;
 
 const MyGoodsContent = styled.div`

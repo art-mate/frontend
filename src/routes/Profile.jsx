@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import MyPaint from '../components/MyPaint';
+import { BiPaint } from 'react-icons/bi';
+import {
+  AiOutlineShopping,
+  AiOutlineHome,
+  AiOutlineLogout,
+  AiOutlineShoppingCart,
+} from 'react-icons/ai';
 
 import { authService, dbService } from '../fBase';
 import { Link } from 'react-router-dom';
@@ -49,17 +56,18 @@ const MenuContainer = styled.div`
     background: none;
     border: none;
     font-size: 1.2rem;
+    margin-left: 10px;
   }
 `;
 
-const UploadContainer = styled.div`
+const LinkContainer = styled.div`
   width: 50%;
-  height: 150px;
+  height: 220px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  border-bottom: 1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
   font-size: 1.5rem;
   padding: 10px;
 
@@ -73,6 +81,7 @@ const UploadContainer = styled.div`
     background: none;
     border: none;
     font-size: 1.2rem;
+    margin-left: 10px;
   }
 `;
 
@@ -119,7 +128,7 @@ const MyArtMenu = styled.div`
   align-items: center;
   color: #8f8f8f;
   padding: 8px;
-  margin-top: 5px;
+  margin-top: 20px;
 `;
 
 const NotImage = styled.div`
@@ -198,24 +207,6 @@ const Profile = ({ userObj, refreshUser }) => {
             )}
           </InfoWrap>
         </InfoContainer>
-        <UploadContainer>
-          <div>
-            <span role="img" aria-labelledby="paint">
-              🖼
-            </span>
-            <Link to="/uploadp">
-              <button> 작품 등록하기</button>
-            </Link>
-          </div>
-          <div>
-            <span role="img" aria-labelledby="goods">
-              🎎
-            </span>
-            <Link to="/uploadg">
-              <button> 굿즈 등록하기</button>
-            </Link>
-          </div>
-        </UploadContainer>
         <MyArtContainer>
           <MyArtMenu>
             {userObj.displayName ? userObj.displayName : userObj.email}님의 그림
@@ -250,19 +241,35 @@ const Profile = ({ userObj, refreshUser }) => {
             )}
           </MyGoodsContainer>
         </MyArtContainer>
+        <LinkContainer>
+          <div>
+            <BiPaint size={25} />
+            <Link to="/uploadp">
+              <button> 작품 등록하기</button>
+            </Link>
+          </div>
+          <div>
+            <AiOutlineShopping size={25} />
+            <Link to="/uploadg">
+              <button> 굿즈 등록하기</button>
+            </Link>
+          </div>
+          <div>
+            <AiOutlineShoppingCart size={25} />
+            <Link to="/uploadg">
+              <button> 장바구니</button>
+            </Link>
+          </div>
+        </LinkContainer>
         <MenuContainer>
           <MenuWrap>
-            <span role="img" aria-labelledby="home">
-              🏡
-            </span>
+            <AiOutlineHome size={25} />
             <Link to="/">
               <button> 홈으로 가기</button>
             </Link>
           </MenuWrap>
           <MenuWrap>
-            <span role="img" aria-labelledby="logout">
-              ❌
-            </span>
+            <AiOutlineLogout size={25} />
             <button onClick={onLogOutClick}> 로그아웃</button>
           </MenuWrap>
         </MenuContainer>

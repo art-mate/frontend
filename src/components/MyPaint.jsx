@@ -9,8 +9,8 @@ const MyPaintWrap = styled.div`
 `;
 
 const MyPaintPhoto = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 180px;
+  height: 180px;
 `;
 
 const MyPaintContent = styled.div`
