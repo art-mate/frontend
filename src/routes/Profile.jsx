@@ -173,9 +173,6 @@ const Profile = ({ userObj, refreshUser }) => {
 
     setMyPaints(paintData);
     setMyGoods(goodsData);
-
-    // console.log(paintData);
-    // console.log(goodsData);
   };
 
   useEffect(() => {
@@ -256,7 +253,7 @@ const Profile = ({ userObj, refreshUser }) => {
           </div>
           <div>
             <AiOutlineShoppingCart size={25} />
-            <Link to="/uploadg">
+            <Link to="/cart">
               <button> 장바구니</button>
             </Link>
           </div>

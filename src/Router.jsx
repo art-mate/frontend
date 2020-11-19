@@ -8,6 +8,7 @@ import GoodsUpload from './routes/GoodsUpload';
 import Detail from './routes/Detail';
 import PaintEditing from './routes/PaintEditing';
 import GoodsEditing from './routes/GoodsEditing';
+import Cart from './routes/Cart';
 
 export default function Router({ userObj, refreshUser }) {
   return (
@@ -41,6 +42,7 @@ export default function Router({ userObj, refreshUser }) {
           <Route path="/goods/:id" component={Detail} />
           <Route path="/editp" exact component={PaintEditing} />
           <Route path="/editg" exact component={GoodsEditing} />
+          <Route path="/cart" exact render={() => <Cart userObj={userObj} />} />
         </Switch>
       </BrowserRouter>
     </>

@@ -3,6 +3,7 @@ import { ThemeContext } from '../App';
 import styled from 'styled-components';
 import { dbService } from '../fBase';
 import Post from './Post';
+import { FcPicture, FcLightAtTheEndOfTunnel } from 'react-icons/fc';
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -13,7 +14,7 @@ const MenuContainer = styled.div`
 `;
 
 const MenuSelector = styled.div`
-  width: 50%;
+  width: 40%;
   height: 70px;
   margin-top: 30px;
   display: flex;
@@ -21,7 +22,7 @@ const MenuSelector = styled.div`
   justify-content: space-evenly;
   align-items: center;
   border-radius: 5px;
-  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.2);
   background: ${(props) => props.themeProps.navBar};
 `;
 
@@ -76,6 +77,17 @@ const MenuGrid = styled.div`
   }
 `;
 
+const MenuIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & span {
+    color: #828282;
+    font-size: 13px;
+    margin-left: 20px;
+  }
+`;
+
 export default function Menu({ userObj }) {
   const { theme } = useContext(ThemeContext);
   const [collections, setCollections] = useState([]);
@@ -121,10 +133,14 @@ export default function Menu({ userObj }) {
             themeProps={theme}
             onClick={onCollectionClick}
           >
-            <span>Collection</span>
+            <MenuIcon>
+              <FcPicture size={40} /> <span>Collection</span>
+            </MenuIcon>
           </CollectionMenu>
           <GoodsMenu select={select} themeProps={theme} onClick={onGoodsClick}>
-            <span>Goods</span>
+            <MenuIcon>
+              <FcLightAtTheEndOfTunnel size={40} /> <span>Goods</span>
+            </MenuIcon>
           </GoodsMenu>
         </MenuSelector>
         {select === 'collection' ? (

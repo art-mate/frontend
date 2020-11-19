@@ -58,7 +58,6 @@ const Content = styled.span`
 
 const Post = ({ userObj, artData, select }) => {
   const { theme } = useContext(ThemeContext);
-  const isUser = Boolean(userObj);
 
   const [isLiked, setIsLiked] = useState(false);
 
@@ -78,7 +77,7 @@ const Post = ({ userObj, artData, select }) => {
                 select === 'collections'
                   ? `/paint/${artData.id}`
                   : `/goods/${artData.id}`,
-              state: { artData, isUser, isLiked, select },
+              state: { artData, isLiked, select },
             }}
           >
             <img
@@ -100,10 +99,6 @@ const Post = ({ userObj, artData, select }) => {
           <div>
             <SubTitle>작가명</SubTitle>
             <Content>{artData.artist}</Content>
-          </div>
-          <div>
-            <SubTitle>제작년도</SubTitle>
-            <Content>{artData.year}</Content>
           </div>
           <div>
             <SubTitle>가격</SubTitle>

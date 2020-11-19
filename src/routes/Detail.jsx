@@ -109,7 +109,7 @@ const LikesStore = styled.div`
 
 const Detail = ({ location }) => {
   const { theme } = useContext(ThemeContext);
-  const { artData, isUser, isLiked, select } = location.state;
+  const { artData, isLiked, select } = location.state;
   const [userObj, setUserObj] = useState(null);
   const [detailLikes, setDetailLikes] = useState(isLiked);
 
@@ -193,7 +193,7 @@ const Detail = ({ location }) => {
 
   return (
     <>
-      <Navigation userObj={isUser} />
+      <Navigation userObj={userObj} />
       <DetailContainer>
         <PhotoWrap>
           <img src={artData.attachmentUrl} />
