@@ -23,10 +23,6 @@ const MyGoodsContent = styled.div`
   & span {
     color: #8c8c8c;
     cursor: pointer;
-
-    &:hover {
-      color: #363537;
-    }
   }
 `;
 
@@ -56,7 +52,9 @@ const MyGoods = ({ myGoods, goodsId }) => {
           >
             <span>수정</span>
           </Link>
-          <span onClick={onDeleteClick}>삭제</span>
+          <span onClick={onDeleteClick} style={{ color: '#bd3333' }}>
+            삭제
+          </span>
         </MyGoodsContent>
       </MyGoodsWrap>
     </>
