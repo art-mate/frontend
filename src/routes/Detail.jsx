@@ -8,6 +8,7 @@ import {
   AiFillHeart,
 } from 'react-icons/ai';
 
+import { authService } from '../fBase';
 import { dbService } from '../fBase';
 
 const DetailContainer = styled.div`
@@ -102,12 +103,23 @@ const LikesStore = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 100%;
+    cursor: pointer;
   }
 `;
 
 const Detail = ({ location }) => {
   const { theme } = useContext(ThemeContext);
-  const { artData, isUser, isLiked } = location.state;
+  const { artData, isUser, isLiked, select } = location.state;
+  const [userObj, setUserObj] = useState(null);
+  const [detailLikes, setDetailLikes] = useState(isLiked);
+
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setUserObj(user);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     window.scrollTo({
@@ -115,6 +127,38 @@ const Detail = ({ location }) => {
       left: 0,
     });
   }, []);
+
+  const onLikesClick = async () => {
+    if (userObj) {
+      if (Array.isArray(artData.likes) && artData.likes.length) {
+        const likes = artData.likes;
+        if (artData.likes.includes(userObj.uid)) {
+          const idx = likes.indexOf(userObj.uid);
+          if (idx > -1) likes.splice(idx, 1);
+        } else {
+          likes.push(userObj.uid);
+        }
+        if (select === 'collection') {
+          await dbService.doc(`paints/${artData.id}`).update({ likes: likes });
+        } else {
+          await dbService.doc(`goods/${artData.id}`).update({ likes: likes });
+        }
+      } else {
+        if (select === 'collection') {
+          await dbService
+            .doc(`paints/${artData.id}`)
+            .update({ likes: [`${userObj.uid}`] });
+        } else {
+          await dbService
+            .doc(`goods/${artData.id}`)
+            .update({ likes: [`${userObj.uid}`] });
+        }
+      }
+      setDetailLikes((prev) => !prev);
+    } else {
+      alert('로그인이 필요합니다.');
+    }
+  };
 
   return (
     <>
@@ -149,7 +193,11 @@ const Detail = ({ location }) => {
           <AiOutlineShoppingCart size={37} />
         </div>
         <div>
-          {isLiked ? <AiFillHeart size={37} /> : <AiOutlineHeart size={37} />}
+          {detailLikes ? (
+            <AiFillHeart size={37} onClick={onLikesClick} />
+          ) : (
+            <AiOutlineHeart size={37} onClick={onLikesClick} />
+          )}
         </div>
       </LikesStore>
     </>
