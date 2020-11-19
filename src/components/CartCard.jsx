@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 import { dbService } from '../fBase';
-import { useHistory } from 'react-router-dom';
 
 const CardWrap = styled.div`
   width: 700px;
@@ -73,7 +72,6 @@ const DetailWrap = styled.div`
 
 const CartCard = ({ artData, artId, isPaint, userObj, getArts }) => {
   const { theme } = useContext(ThemeContext);
-  const history = useHistory();
 
   const onCancelClick = async () => {
     const carts = artData.cart;
@@ -93,7 +91,7 @@ const CartCard = ({ artData, artId, isPaint, userObj, getArts }) => {
   return (
     <CardWrap>
       <CardPhotoWrap>
-        <img src={artData.attachmentUrl} />
+        <img src={artData.attachmentUrl} alt="attachment" />
       </CardPhotoWrap>
       <CardInfoWrap>
         <CardDetail themeProps={theme}>

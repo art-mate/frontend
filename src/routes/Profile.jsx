@@ -100,13 +100,6 @@ const MyArtContainer = styled.div`
   align-items: center;
 `;
 
-const Content = styled.div`
-  width: 50%;
-  height: 30px;
-  font-size: 20px;
-  padding: 10px;
-`;
-
 const MyPaintContainer = styled.div`
   width: 60%;
   display: flex;

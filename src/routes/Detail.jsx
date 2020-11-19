@@ -200,7 +200,7 @@ const Detail = ({ location }) => {
       <Navigation userObj={userObj} />
       <DetailContainer>
         <PhotoWrap>
-          <img src={artData.attachmentUrl} />
+          <img src={artData.attachmentUrl} alt="attachment" />
         </PhotoWrap>
         <TitleWrap>
           <span>{artData.name}</span>
