@@ -15,6 +15,7 @@ const MenuContainer = styled.div`
 
 const MenuSelector = styled.div`
   width: 40%;
+  min-width: 400px;
   height: 70px;
   margin-top: 30px;
   display: flex;

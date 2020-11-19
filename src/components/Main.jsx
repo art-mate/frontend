@@ -19,8 +19,8 @@ const IntroSection = styled.section`
   background: linear-gradient(45deg, #ce1818, #49b941);
 `;
 
-const ContentContainer = styled.section`
-  width: 45%;
+const ContentContainer = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@ const ContentContainer = styled.section`
 
 const MainContent = styled.div`
   color: white;
-  font-size: 1.2rem;
+  font-size: 1rem;
   width: 80%;
 
   span {
@@ -41,7 +41,7 @@ const MainContent = styled.div`
 `;
 
 const SubHead = styled.h3`
-  font-size: 2.6rem;
+  font-size: 2.3rem;
   display: flex;
   justify-content: center;
   margin-bottom: 25px;
