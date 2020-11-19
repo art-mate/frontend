@@ -202,6 +202,8 @@ const GoodsUpload = ({ userObj }) => {
       createdAt: Date.now(),
       creatorId: userObj.uid,
       attachmentUrl,
+      likes: [],
+      cart: [],
     };
     await dbService
       .collection('goods')

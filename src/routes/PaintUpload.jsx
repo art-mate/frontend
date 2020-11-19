@@ -202,6 +202,8 @@ const PaintUpload = ({ userObj }) => {
       createdAt: Date.now(),
       creatorId: userObj.uid,
       attachmentUrl,
+      likes: [],
+      cart: [],
     };
     await dbService
       .collection('paints')
