@@ -60,10 +60,14 @@ const Post = ({ userObj, artData, select }) => {
   const { theme } = useContext(ThemeContext);
 
   const [isLiked, setIsLiked] = useState(false);
+  const [isCart, setIsCart] = useState(false);
 
   useEffect(() => {
     if (userObj && artData.likes.includes(userObj.uid)) {
       setIsLiked(true);
+    }
+    if (userObj && artData.cart.includes(userObj.uid)) {
+      setIsCart(true);
     }
   }, []);
 
@@ -77,7 +81,7 @@ const Post = ({ userObj, artData, select }) => {
                 select === 'collections'
                   ? `/paint/${artData.id}`
                   : `/goods/${artData.id}`,
-              state: { artData, isLiked, select },
+              state: { artData, isLiked, select, isCart },
             }}
           >
             <img
@@ -90,7 +94,6 @@ const Post = ({ userObj, artData, select }) => {
         )}
       </PostPhotoWrap>
       <PostDescription themeProps={theme}>
-        {/* <PostTitle>{artData.name}</PostTitle> */}
         <PostDetail>
           <div>
             <SubTitle>작품명</SubTitle>

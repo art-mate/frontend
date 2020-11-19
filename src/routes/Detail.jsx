@@ -7,6 +7,7 @@ import {
   AiOutlineShoppingCart,
   AiFillHeart,
 } from 'react-icons/ai';
+import { FaCartPlus } from 'react-icons/fa';
 
 import { authService } from '../fBase';
 import { dbService } from '../fBase';
@@ -109,9 +110,10 @@ const LikesStore = styled.div`
 
 const Detail = ({ location }) => {
   const { theme } = useContext(ThemeContext);
-  const { artData, isLiked, select } = location.state;
+  const { artData, isLiked, isCart, select } = location.state;
   const [userObj, setUserObj] = useState(null);
   const [detailLikes, setDetailLikes] = useState(isLiked);
+  const [detailCart, setDetailCart] = useState(isCart);
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -186,6 +188,8 @@ const Detail = ({ location }) => {
             .update({ cart: [`${userObj.uid}`] });
         }
       }
+      setDetailCart((prev) => !prev);
+      alert('해당 작품을 장바구니에 추가하였습니다.');
     } else {
       alert('로그인이 필요합니다.');
     }
@@ -221,7 +225,11 @@ const Detail = ({ location }) => {
       </DetailContainer>
       <LikesStore themeProps={theme}>
         <div>
-          <AiOutlineShoppingCart size={37} onClick={onCartClick} />
+          {detailCart ? (
+            <FaCartPlus size={37} onClick={onCartClick} />
+          ) : (
+            <AiOutlineShoppingCart size={37} onClick={onCartClick} />
+          )}
         </div>
         <div>
           {detailLikes ? (
