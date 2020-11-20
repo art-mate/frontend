@@ -189,7 +189,11 @@ const Detail = ({ location }) => {
         }
       }
       setDetailCart((prev) => !prev);
-      alert('해당 작품을 장바구니에 추가하였습니다.');
+      if (detailCart) {
+        alert('해당 작품을 장바구니에서 삭제하였습니다.');
+      } else {
+        alert('해당 작품을 장바구니에 추가하였습니다.');
+      }
     } else {
       alert('로그인이 필요합니다.');
     }
