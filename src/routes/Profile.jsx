@@ -24,6 +24,9 @@ const ProfileContainer = styled.div`
 
 const InfoContainer = styled.div`
   width: 50%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   height: 160px;
   display: flex;
   flex-direction: column;
@@ -44,6 +47,9 @@ const InfoWrap = styled.div`
 
 const MenuContainer = styled.div`
   width: 50%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   height: 130px;
   display: flex;
   flex-direction: column;
@@ -63,6 +69,9 @@ const MenuContainer = styled.div`
 const LinkContainer = styled.div`
   width: 50%;
   height: 220px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -102,6 +111,9 @@ const MyArtContainer = styled.div`
 
 const MyPaintContainer = styled.div`
   width: 60%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: row;
   overflow: auto;
@@ -109,6 +121,9 @@ const MyPaintContainer = styled.div`
 
 const MyGoodsContainer = styled.div`
   width: 60%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: row;
   overflow: auto;
@@ -116,6 +131,9 @@ const MyGoodsContainer = styled.div`
 
 const MyArtMenu = styled.div`
   width: 58%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;

@@ -15,6 +15,7 @@ const MenuContainer = styled.div`
 
 const MenuSelector = styled.div`
   width: 40%;
+  max-width: 700px;
   min-width: 400px;
   height: 70px;
   margin-top: 30px;
@@ -62,6 +63,7 @@ const GoodsMenu = styled.div`
 `;
 
 const MenuGrid = styled.div`
+  max-width: 1100px;
   display: grid;
   margin-bottom: 60px;
   margin-top: 30px;

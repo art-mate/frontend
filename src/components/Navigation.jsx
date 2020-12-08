@@ -25,6 +25,7 @@ const NavContainer = styled.nav`
 
 const NavContentContainer = styled.div`
   width: 80%;
+  max-width: 1150px;
   height: 100%;
   display: flex;
   justify-content: space-between;

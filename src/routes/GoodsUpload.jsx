@@ -18,6 +18,9 @@ const UploadContainer = styled.div`
 
 const UploadFormWrap = styled.div`
   width: 55%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   min-width: 600px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);

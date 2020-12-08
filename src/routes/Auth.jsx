@@ -31,6 +31,9 @@ const LoginContainer = styled.div`
 const LoginFormWrap = styled.div`
   width: 38%;
   min-width: 530px;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
   height: 570px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);

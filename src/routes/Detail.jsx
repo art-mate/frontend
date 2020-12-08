@@ -22,7 +22,10 @@ const DetailContainer = styled.div`
 
 const PhotoWrap = styled.div`
   width: 50%;
+  max-width: 800px;
   margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const TitleWrap = styled.div`
@@ -45,8 +48,11 @@ const InfoContainer = styled.div`
 
 const InfoWrap = styled.div`
   width: 50%;
+  max-width: 800px;
   height: 100%;
   padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 2;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: ${(props) => props.themeProps.navBar};

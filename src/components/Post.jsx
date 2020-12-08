@@ -9,7 +9,9 @@ const PostContainer = styled.div`
   width: 23vw;
   height: 26vw;
   min-width: 340px;
+  max-width: 350px;
   min-height: 450px;
+  max-height: 460px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
 `;
