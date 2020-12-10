@@ -84,17 +84,17 @@ const CommentWrap = styled.div`
 
 const SubTitle = styled.span`
   color: #8c8c8c;
-  font-size: 15px;
+  font-size: 14px;
 `;
 
 const Content = styled.span`
   margin-left: 10px;
-  font-size: 15px;
+  font-size: 14px;
 `;
 
 const Description = styled.p`
   line-height: 1.5;
-  font-size: 15px;
+  font-size: 14px;
   margin-top: 5px;
 `;
 
