@@ -74,7 +74,6 @@ const CommentWrap = styled.div`
   margin-left: auto;
   margin-right: auto;
   line-height: 2;
-  background: ${(props) => props.themeProps.navBar};
   margin-bottom: 60px;
   & label {
     display: block;
@@ -167,7 +166,7 @@ const Detail = ({ location }) => {
   const [userObj, setUserObj] = useState(null);
   const [detailLikes, setDetailLikes] = useState(isLiked);
   const [detailCart, setDetailCart] = useState(isCart);
-  const [comment, setComment] = useState('');
+  const [commentInput, setCommentInput] = useState('');
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -253,12 +252,49 @@ const Detail = ({ location }) => {
     }
   };
 
+  const onCommentSubmit = async () => {
+    if (userObj) {
+      const commentObj = {
+        userName: userObj.displayName,
+        userEmail: userObj.email,
+        userPhoto: userObj.photoURL,
+        comment: commentInput,
+      };
+
+      if (Array.isArray(artData.comment) && artData.comment.length) {
+        if (select === 'collection') {
+          await dbService
+            .doc(`paints/${artData.id}`)
+            .update({ comment: [commentInput] });
+        } else {
+          await dbService
+            .doc(`goods/${artData.id}`)
+            .update({ comment: [commentInput] });
+        }
+      } else {
+        const comments = artData.comment;
+        comments.push(commentInput);
+        if (select === 'collection') {
+          await dbService
+            .doc(`paints/${artData.id}`)
+            .update({ comment: comments });
+        } else {
+          await dbService
+            .doc(`goods/${artData.id}`)
+            .update({ comment: comments });
+        }
+      }
+    } else {
+      alert('로그인이 필요합니다.');
+    }
+  };
+
   const onChange = (event) => {
     const {
       target: { name, value },
     } = event;
-    if (name === 'comment') {
-      setComment(value);
+    if (name === 'commentInput') {
+      setCommentInput(value);
     }
   };
 
@@ -291,17 +327,19 @@ const Detail = ({ location }) => {
         </InfoContainer>
         <CommentContainer>
           <CommentWrap themeProps={theme}>
-            <label htmlFor="comment">댓글</label>
+            <label htmlFor="commentInput">댓글</label>
             <CommentUserInputWrap>
               <input
-                name="comment"
-                value={comment}
+                name="commentInput"
+                value={commentInput}
                 onChange={onChange}
                 placeholder="댓글 달기"
                 type="text"
                 maxLength={200}
               />
-              <CommentSubmitButton>등록</CommentSubmitButton>
+              <CommentSubmitButton onClick={onCommentSubmit}>
+                등록
+              </CommentSubmitButton>
             </CommentUserInputWrap>
           </CommentWrap>
         </CommentContainer>

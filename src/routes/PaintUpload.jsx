@@ -207,6 +207,7 @@ const PaintUpload = ({ userObj }) => {
       attachmentUrl,
       likes: [],
       cart: [],
+      comment: [],
     };
     await dbService
       .collection('paints')

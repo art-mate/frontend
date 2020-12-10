@@ -207,6 +207,7 @@ const GoodsUpload = ({ userObj }) => {
       attachmentUrl,
       likes: [],
       cart: [],
+      comment: [],
     };
     await dbService
       .collection('goods')
