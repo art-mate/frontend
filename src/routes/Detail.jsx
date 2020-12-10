@@ -59,6 +59,29 @@ const InfoWrap = styled.div`
   margin-bottom: 60px;
 `;
 
+const CommentContainer = styled.div`
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CommentWrap = styled.div`
+  width: 50%;
+  max-width: 800px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 2;
+  background: ${(props) => props.themeProps.navBar};
+  margin-bottom: 60px;
+  & label {
+    display: block;
+    font-size: 0.8rem;
+  }
+`;
+
 const SubTitle = styled.span`
   color: #8c8c8c;
   font-size: 15px;
@@ -114,12 +137,37 @@ const LikesStore = styled.div`
   }
 `;
 
+const CommentUserInputWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & input {
+    padding: 15px;
+    width: 100%;
+    margin-top: 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const CommentSubmitButton = styled.button`
+  width: 10%;
+  height: 60px;
+  cursor: pointer;
+  color: #ce1818;
+  border: none;
+  background: none;
+`;
+
 const Detail = ({ location }) => {
   const { theme } = useContext(ThemeContext);
   const { artData, isLiked, isCart, select } = location.state;
   const [userObj, setUserObj] = useState(null);
   const [detailLikes, setDetailLikes] = useState(isLiked);
   const [detailCart, setDetailCart] = useState(isCart);
+  const [comment, setComment] = useState('');
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -205,6 +253,15 @@ const Detail = ({ location }) => {
     }
   };
 
+  const onChange = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === 'comment') {
+      setComment(value);
+    }
+  };
+
   return (
     <>
       <Navigation userObj={userObj} />
@@ -232,6 +289,22 @@ const Detail = ({ location }) => {
             <Description>{artData.description}</Description>
           </InfoWrap>
         </InfoContainer>
+        <CommentContainer>
+          <CommentWrap themeProps={theme}>
+            <label htmlFor="comment">댓글</label>
+            <CommentUserInputWrap>
+              <input
+                name="comment"
+                value={comment}
+                onChange={onChange}
+                placeholder="댓글 달기"
+                type="text"
+                maxLength={200}
+              />
+              <CommentSubmitButton>등록</CommentSubmitButton>
+            </CommentUserInputWrap>
+          </CommentWrap>
+        </CommentContainer>
       </DetailContainer>
       <LikesStore themeProps={theme}>
         <div>
