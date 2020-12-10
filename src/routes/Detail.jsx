@@ -66,6 +66,7 @@ const CommentContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 60px;
 `;
 
 const CommentWrap = styled.div`
@@ -76,6 +77,8 @@ const CommentWrap = styled.div`
   margin-right: auto;
   line-height: 2;
   margin-bottom: 60px;
+  padding: 20px;
+  background: ${(props) => props.themeProps.navBar};
   & label {
     display: block;
     font-size: 0.8rem;
@@ -139,6 +142,7 @@ const LikesStore = styled.div`
 
 const CommentUserInputWrap = styled.div`
   width: 100%;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
