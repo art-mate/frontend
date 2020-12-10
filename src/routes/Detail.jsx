@@ -10,6 +10,7 @@ import {
 } from 'react-icons/ai';
 import { FaCartPlus } from 'react-icons/fa';
 
+import { v4 as uuidv4 } from 'uuid';
 import { authService } from '../fBase';
 import { dbService } from '../fBase';
 
@@ -260,9 +261,11 @@ const Detail = ({ location }) => {
   const onCommentSubmit = async () => {
     if (userObj) {
       const commentObj = {
+        id: uuidv4(),
         userName: userObj.displayName,
         userEmail: userObj.email,
         userPhoto: userObj.photoURL,
+        createdAt: Date.now(),
         comment: commentInput,
       };
 
@@ -349,7 +352,7 @@ const Detail = ({ location }) => {
             </CommentUserInputWrap>
             {artData.comment &&
               artData.comment.map((comment) => (
-                <Comment key={comment.userName} commentObj={comment} />
+                <Comment key={comment.id} commentObj={comment} />
               ))}
           </CommentWrap>
         </CommentContainer>

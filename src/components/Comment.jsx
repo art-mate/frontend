@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 import { AiOutlineEllipsis } from 'react-icons/ai';
@@ -56,6 +56,7 @@ const CommentContent = styled.div`
 
 export default function Comment({ commentObj }) {
   const { theme } = useContext(ThemeContext);
+
   return (
     <CommentBox>
       <UserPhoto>
