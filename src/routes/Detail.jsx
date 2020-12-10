@@ -268,29 +268,16 @@ const Detail = ({ location }) => {
         createdAt: Date.now(),
         comment: commentInput,
       };
-
-      if (Array.isArray(artData.comment) && artData.comment.length) {
-        const comments = artData.comment;
-        comments.push(commentObj);
-        if (select === 'collection') {
-          await dbService
-            .doc(`paints/${artData.id}`)
-            .update({ comment: comments });
-        } else {
-          await dbService
-            .doc(`goods/${artData.id}`)
-            .update({ comment: comments });
-        }
+      const comments = artData.comment;
+      comments.push(commentObj);
+      if (select === 'collection') {
+        await dbService
+          .doc(`paints/${artData.id}`)
+          .update({ comment: comments });
       } else {
-        if (select === 'collection') {
-          await dbService
-            .doc(`paints/${artData.id}`)
-            .update({ comment: [commentObj] });
-        } else {
-          await dbService
-            .doc(`goods/${artData.id}`)
-            .update({ comment: [commentObj] });
-        }
+        await dbService
+          .doc(`goods/${artData.id}`)
+          .update({ comment: comments });
       }
       setCommentInput('');
     } else {
