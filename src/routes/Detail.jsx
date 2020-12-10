@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 import Navigation from '../components/Navigation';
+import Comment from '../components/Comment';
 import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
@@ -262,28 +263,29 @@ const Detail = ({ location }) => {
       };
 
       if (Array.isArray(artData.comment) && artData.comment.length) {
+        const comments = artData.comment;
+        comments.push(commentObj);
         if (select === 'collection') {
           await dbService
             .doc(`paints/${artData.id}`)
-            .update({ comment: [commentInput] });
+            .update({ comment: comments });
         } else {
           await dbService
             .doc(`goods/${artData.id}`)
-            .update({ comment: [commentInput] });
+            .update({ comment: comments });
         }
       } else {
-        const comments = artData.comment;
-        comments.push(commentInput);
         if (select === 'collection') {
           await dbService
             .doc(`paints/${artData.id}`)
-            .update({ comment: comments });
+            .update({ comment: [commentObj] });
         } else {
           await dbService
             .doc(`goods/${artData.id}`)
-            .update({ comment: comments });
+            .update({ comment: [commentObj] });
         }
       }
+      setCommentInput('');
     } else {
       alert('로그인이 필요합니다.');
     }
@@ -341,6 +343,10 @@ const Detail = ({ location }) => {
                 등록
               </CommentSubmitButton>
             </CommentUserInputWrap>
+            {artData.comment &&
+              artData.comment.map((comment) => (
+                <Comment key={comment.userName} commentObj={comment} />
+              ))}
           </CommentWrap>
         </CommentContainer>
       </DetailContainer>

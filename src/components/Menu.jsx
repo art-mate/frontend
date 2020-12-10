@@ -103,7 +103,6 @@ export default function Menu({ userObj }) {
         id: doc.id,
         ...doc.data(),
       }));
-      //console.log(postArray);
       setCollections(postArray);
     });
     dbService.collection('goods').onSnapshot((snapshot) => {
