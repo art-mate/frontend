@@ -148,19 +148,40 @@ const GoodsEditing = ({ location }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const GoodsObj = {
-      name: newGoods,
-      artist: newArtist,
-      price: newPrice,
-      description: newDescription,
-      year: newYear,
-    };
-    await dbService
-      .doc(`goods/${goodsId}`)
-      .update(GoodsObj)
-      .then(() => alert('수정이 완료되었습니다.'))
-      .then(() => history.push('/profile'))
-      .catch((error) => alert(error.message));
+    if (isValidInput()) {
+      const GoodsObj = {
+        name: newGoods,
+        artist: newArtist,
+        price: newPrice,
+        description: newDescription,
+        year: newYear,
+      };
+      await dbService
+        .doc(`goods/${goodsId}`)
+        .update(GoodsObj)
+        .then(() => alert('수정이 완료되었습니다.'))
+        .then(() => history.push('/profile'))
+        .catch((error) => alert(error.message));
+    }
+  };
+
+  const isValidInput = () => {
+    if (isNaN(newYear) || newYear == '') {
+      alert('작품 제작 년도를 숫자로 입력하세요.');
+      setNewYear('');
+      return false;
+    }
+    if (isNaN(newPrice) || newPrice == '') {
+      alert('작품의 희망 가격을 숫자로 입력하세요.');
+      setNewPrice('');
+      return false;
+    }
+    if (newDescription.length < 10) {
+      alert('작품에 대한 설명은 10자 이상 이여야 합니다.');
+      setNewDescription('');
+      return false;
+    }
+    return true;
   };
 
   const onChange = (event) => {

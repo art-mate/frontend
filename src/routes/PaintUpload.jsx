@@ -196,27 +196,48 @@ const PaintUpload = ({ userObj }) => {
       const response = await fileRef.putString(attachment, 'data_url');
       attachmentUrl = await response.ref.getDownloadURL();
     }
-    const paintObj = {
-      name: paint,
-      artist: artist,
-      price: price,
-      description: description,
-      year: year,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-      attachmentUrl,
-      likes: [],
-      cart: [],
-      comment: [],
-    };
-    await dbService
-      .collection('paints')
-      .add(paintObj)
-      .then(() => alert('사진 등록이 완료되었습니다.'))
-      .then(() => history.push('/'))
-      .catch((error) => alert(error.message));
-    setPaint('');
-    setAttachment('');
+    if (isValidInput()) {
+      const paintObj = {
+        name: paint,
+        artist: artist,
+        price: price,
+        description: description,
+        year: year,
+        createdAt: Date.now(),
+        creatorId: userObj.uid,
+        attachmentUrl,
+        likes: [],
+        cart: [],
+        comment: [],
+      };
+      await dbService
+        .collection('paints')
+        .add(paintObj)
+        .then(() => alert('사진 등록이 완료되었습니다.'))
+        .then(() => history.push('/'))
+        .catch((error) => alert(error.message));
+      setPaint('');
+      setAttachment('');
+    }
+  };
+
+  const isValidInput = () => {
+    if (isNaN(year) || year == '') {
+      alert('작품 제작 년도를 숫자로 입력하세요.');
+      setYear('');
+      return false;
+    }
+    if (isNaN(price) || price == '') {
+      alert('작품의 희망 가격을 숫자로 입력하세요.');
+      setPrice('');
+      return false;
+    }
+    if (description.length < 10) {
+      alert('작품에 대한 설명은 10자 이상 이여야 합니다.');
+      setDescription('');
+      return false;
+    }
+    return true;
   };
 
   const onChange = (event) => {
